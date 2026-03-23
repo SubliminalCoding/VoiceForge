@@ -137,6 +137,26 @@ section{padding:100px 0}
 .case h3{font-size:17px;font-weight:700;margin-bottom:10px}
 .case p{font-size:14px;color:var(--text2);line-height:1.55}
 
+/* ── Pricing ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start}
+.pricing-card{padding:36px 32px;border-radius:16px;background:var(--surface);border:1px solid var(--border);position:relative;transition:border-color 0.2s,transform 0.2s}
+.pricing-card:hover{transform:translateY(-2px)}
+.pricing-card.popular{border-color:var(--accent);background:linear-gradient(180deg,rgba(99,102,241,0.06) 0%,var(--surface) 100%)}
+.pricing-card.popular:hover{border-color:var(--accent2)}
+.pricing-popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:4px 16px;border-radius:100px;background:var(--accent);color:#fff;font-size:12px;font-weight:700;white-space:nowrap}
+.pricing-tier{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text2);margin-bottom:8px}
+.pricing-price{font-size:48px;font-weight:900;letter-spacing:-0.04em;line-height:1}
+.pricing-period{font-size:14px;color:var(--text3);margin-bottom:24px}
+.pricing-features{list-style:none;margin-bottom:28px}
+.pricing-features li{font-size:14px;color:var(--text2);padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.pricing-features li::before{content:'\2713';color:var(--green);font-weight:700;font-size:14px;flex-shrink:0}
+.pricing-btn{display:block;text-align:center;padding:14px 24px;border-radius:10px;font-size:15px;font-weight:700;border:1px solid var(--border);color:var(--text);background:var(--surface2);transition:background 0.15s,border-color 0.15s,transform 0.15s}
+.pricing-btn:hover{border-color:var(--text3);background:var(--border);color:#fff;transform:translateY(-1px)}
+.pricing-btn.primary{background:linear-gradient(135deg,var(--accent),#4f46e5);border-color:transparent;color:#fff}
+.pricing-btn.primary:hover{box-shadow:0 6px 24px rgba(99,102,241,0.3);color:#fff;transform:translateY(-1px)}
+.pricing-alt{text-align:center;margin-top:12px;font-size:13px;color:var(--text3)}
+.pricing-alt a{color:var(--accent2);font-weight:600}
+
 /* ── Social proof ── */
 .proof{text-align:center}
 .proof-logos{display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:0.4;margin-top:32px;font-size:15px;color:var(--text3);font-weight:600;letter-spacing:0.02em}
@@ -160,7 +180,7 @@ footer a:hover{color:var(--text)}
 <nav>
   <div class="container">
     <div class="logo">Voice<span>Forge</span></div>
-    <a href="#cta" class="nav-cta">Get Early Access</a>
+    <a href="#pricing" class="nav-cta">View Pricing</a>
   </div>
 </nav>
 
@@ -325,6 +345,65 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
+<!-- Pricing -->
+<section class="section-border" id="pricing">
+  <div class="container">
+    <div class="section-title fade-up" style="text-align:center">Simple pricing</div>
+    <p class="section-desc centered fade-up delay-1">Start free. Upgrade when VoiceForge becomes part of your workflow.</p>
+    <div class="pricing-grid">
+
+      <div class="pricing-card fade-up delay-1">
+        <div class="pricing-tier">Free</div>
+        <div class="pricing-price">$0</div>
+        <div class="pricing-period">forever</div>
+        <ul class="pricing-features">
+          <li>15 minutes/day of transcription</li>
+          <li>Voice profile learning</li>
+          <li>Dictionary + auto-casing</li>
+          <li>Global hotkey + auto-paste</li>
+          <li>Community support</li>
+        </ul>
+        <a href="#cta" class="pricing-btn">Get Started Free</a>
+      </div>
+
+      <div class="pricing-card popular fade-up delay-2">
+        <div class="pricing-popular-badge">Most Popular</div>
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-price">$7</div>
+        <div class="pricing-period">per month</div>
+        <ul class="pricing-features">
+          <li>Unlimited transcription</li>
+          <li>AI Auto-Rewrite</li>
+          <li>Advanced voice profile</li>
+          <li>Live Git Context</li>
+          <li>Offline local mode</li>
+          <li>Priority support</li>
+        </ul>
+        <!-- REPLACE with your Stripe Payment Link for Pro Monthly -->
+        <a href="https://buy.stripe.com/REPLACE_PRO_MONTHLY" class="pricing-btn primary">Start Pro</a>
+        <div class="pricing-alt">or <a href="https://buy.stripe.com/REPLACE_PRO_YEARLY">$60/year (save 29%)</a></div>
+      </div>
+
+      <div class="pricing-card fade-up delay-3">
+        <div class="pricing-tier">Team</div>
+        <div class="pricing-price">$19</div>
+        <div class="pricing-period">per seat/month</div>
+        <ul class="pricing-features">
+          <li>Everything in Pro</li>
+          <li>Shared team dictionary</li>
+          <li>Admin dashboard</li>
+          <li>Usage analytics</li>
+          <li>SSO + team management</li>
+          <li>Dedicated support</li>
+        </ul>
+        <!-- REPLACE with your Stripe Payment Link for Team -->
+        <a href="https://buy.stripe.com/REPLACE_TEAM" class="pricing-btn">Contact Sales</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- Social Proof -->
 <section class="section-border proof">
   <div class="container">
@@ -343,8 +422,8 @@ footer a:hover{color:var(--text)}
 <section class="section-border final-cta" id="cta">
   <div class="container">
     <div class="section-title fade-up">Stop losing ideas.<br>Start forging them.</div>
-    <p class="fade-up delay-1">VoiceForge is launching soon. Get on the list.</p>
-    <a href="mailto:hello@usevoiceforge.com" class="btn-primary fade-up delay-2">Get Early Access</a>
+    <p class="fade-up delay-1">Start free. No credit card required.</p>
+    <a href="#pricing" class="btn-primary fade-up delay-2">Get Started Free</a>
   </div>
 </section>
 
