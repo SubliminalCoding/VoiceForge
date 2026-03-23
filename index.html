@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoiceForge - Turn spoken ideas into usable output</title>
+<meta name="description" content="VoiceForge captures spoken ideas, transcribes them cleanly, and turns them into usable notes, drafts, and workflow-ready text.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;
+  --surface:#111113;
+  --surface2:#1a1a1f;
+  --border:#222228;
+  --text:#fafafa;
+  --text2:#a1a1aa;
+  --text3:#71717a;
+  --accent:#6366f1;
+  --accent2:#818cf8;
+  --green:#22c55e;
+  --orange:#f97316;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:var(--accent2);text-decoration:none}
+a:hover{color:var(--text)}
+
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* ── Nav ── */
+nav{padding:20px 0;border-bottom:1px solid var(--border)}
+nav .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:20px;font-weight:800;letter-spacing:-0.03em;color:var(--text)}
+.logo span{color:var(--accent2)}
+.nav-cta{padding:10px 24px;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:background 0.15s}
+.nav-cta:hover{background:#4f46e5;color:#fff}
+
+/* ── Hero ── */
+.hero{padding:100px 0 80px;text-align:center}
+.hero-tag{display:inline-block;padding:6px 16px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);font-size:13px;color:var(--text2);margin-bottom:24px;font-weight:500}
+.hero h1{font-size:clamp(40px,6vw,72px);font-weight:900;letter-spacing:-0.04em;line-height:1.05;margin-bottom:24px}
+.hero h1 em{font-style:normal;color:var(--accent2)}
+.hero p{font-size:20px;color:var(--text2);max-width:580px;margin:0 auto 40px;line-height:1.6}
+.hero-cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary{display:inline-block;padding:16px 36px;border-radius:10px;background:var(--accent);color:#fff;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(99,102,241,0.3);color:#fff}
+.btn-secondary{display:inline-block;padding:16px 36px;border-radius:10px;background:var(--surface2);color:var(--text);font-size:16px;font-weight:600;border:1px solid var(--border);cursor:pointer;transition:border-color 0.15s}
+.btn-secondary:hover{border-color:var(--text3);color:#fff}
+
+/* ── Problem ── */
+.problem{padding:80px 0;border-top:1px solid var(--border)}
+.problem h2{font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent2);margin-bottom:24px}
+.problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.problem-card{padding:28px;border-radius:12px;background:var(--surface);border:1px solid var(--border)}
+.problem-card h3{font-size:18px;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em}
+.problem-card p{font-size:15px;color:var(--text2);line-height:1.6}
+
+/* ── Value Prop ── */
+.value{padding:100px 0;text-align:center;border-top:1px solid var(--border)}
+.value h2{font-size:clamp(32px,4vw,48px);font-weight:900;letter-spacing:-0.03em;margin-bottom:16px;line-height:1.1}
+.value h2 em{font-style:normal;color:var(--accent2)}
+.value p{font-size:18px;color:var(--text2);max-width:600px;margin:0 auto 48px}
+.value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;text-align:left}
+.value-item{padding:28px;border-radius:12px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.2s}
+.value-item:hover{border-color:var(--accent)}
+.value-item .icon{font-size:28px;margin-bottom:12px}
+.value-item h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.value-item p{font-size:14px;color:var(--text2);line-height:1.5}
+
+/* ── How it Works ── */
+.how{padding:100px 0;border-top:1px solid var(--border)}
+.how h2{font-size:clamp(32px,4vw,48px);font-weight:900;letter-spacing:-0.03em;text-align:center;margin-bottom:60px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}
+.step{text-align:center}
+.step-num{width:48px;height:48px;border-radius:12px;background:var(--accent);color:#fff;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.step h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.step p{font-size:14px;color:var(--text2);line-height:1.5}
+
+/* ── Differentiation ── */
+.diff{padding:100px 0;border-top:1px solid var(--border)}
+.diff h2{font-size:clamp(32px,4vw,48px);font-weight:900;letter-spacing:-0.03em;margin-bottom:16px}
+.diff>p{font-size:18px;color:var(--text2);margin-bottom:48px;max-width:600px}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.diff-item{padding:24px;border-radius:12px;background:var(--surface);border:1px solid var(--border)}
+.diff-item .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px}
+.diff-item .label.them{color:var(--text3)}
+.diff-item .label.us{color:var(--green)}
+.diff-item p{font-size:15px;color:var(--text2);line-height:1.5}
+@media(max-width:640px){.diff-grid{grid-template-columns:1fr}}
+
+/* ── Use Cases ── */
+.cases{padding:100px 0;border-top:1px solid var(--border)}
+.cases h2{font-size:clamp(32px,4vw,48px);font-weight:900;letter-spacing:-0.03em;text-align:center;margin-bottom:48px}
+.cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.case{padding:28px;border-radius:12px;background:var(--surface);border:1px solid var(--border)}
+.case-who{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--orange);margin-bottom:8px}
+.case h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.case p{font-size:14px;color:var(--text2);line-height:1.5}
+
+/* ── Final CTA ── */
+.final-cta{padding:100px 0;text-align:center;border-top:1px solid var(--border)}
+.final-cta h2{font-size:clamp(32px,4vw,48px);font-weight:900;letter-spacing:-0.03em;margin-bottom:16px;line-height:1.1}
+.final-cta p{font-size:18px;color:var(--text2);max-width:500px;margin:0 auto 40px}
+
+/* ── Footer ── */
+footer{padding:40px 0;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:13px}
+footer a{color:var(--text3)}
+footer a:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="container">
+    <div class="logo">Voice<span>Forge</span></div>
+    <a href="#cta" class="nav-cta">Get Early Access</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-tag">Voice-first capture for people who build things</div>
+    <h1>Speak it. <em>Ship it.</em></h1>
+    <p>VoiceForge turns spoken ideas into clean notes, structured drafts, and workflow-ready text. No typing. No cleanup. Just talk and go.</p>
+    <div class="hero-cta-row">
+      <a href="#cta" class="btn-primary">Get Early Access</a>
+      <a href="#how" class="btn-secondary">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section class="problem">
+  <div class="container">
+    <h2>The problem</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>Ideas happen everywhere</h3>
+        <p>In the car. On a walk. Between meetings. Your best thinking rarely happens at a keyboard.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Voice notes are a graveyard</h3>
+        <p>You record a thought, then never listen to it again. Raw audio is hard to search, share, or act on.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Transcription alone is not enough</h3>
+        <p>Getting words on a screen is step one. What you need is something you can actually use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Value Prop -->
+<section class="value">
+  <div class="container">
+    <h2>From thought to <em>usable output</em></h2>
+    <p>VoiceForge captures what you say and structures it into something you can paste, send, or build on.</p>
+    <div class="value-grid">
+      <div class="value-item">
+        <div class="icon">&#9889;</div>
+        <h3>Instant capture</h3>
+        <p>One hotkey. Start talking. Your words hit the clipboard in under 2 seconds.</p>
+      </div>
+      <div class="value-item">
+        <div class="icon">&#9998;</div>
+        <h3>Auto-structured output</h3>
+        <p>Raw speech gets cleaned, formatted, and structured by AI. No manual editing needed.</p>
+      </div>
+      <div class="value-item">
+        <div class="icon">&#128218;</div>
+        <h3>Learns your voice</h3>
+        <p>A personal voice profile builds over time. Names, jargon, and technical terms get recognized automatically.</p>
+      </div>
+      <div class="value-item">
+        <div class="icon">&#128274;</div>
+        <h3>Works offline</h3>
+        <p>Local Whisper models for full privacy. Your audio never leaves your machine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it Works -->
+<section class="how" id="how">
+  <div class="container">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Press your hotkey</h3>
+        <p>Global shortcut works in any app. You never leave what you're doing.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Speak naturally</h3>
+        <p>Talk like you think. VoiceForge handles the mess.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Get clean output</h3>
+        <p>AI transcribes, your voice profile corrects, and the dictionary auto-fixes technical terms.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Pasted where you were</h3>
+        <p>Text lands in whatever app had focus. Done in under 2 seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Differentiation -->
+<section class="diff">
+  <div class="container">
+    <h2>Not another transcription app</h2>
+    <p>Most voice tools stop at raw text. VoiceForge starts there.</p>
+    <div class="diff-grid">
+      <div class="diff-item">
+        <div class="label them">Typical voice apps</div>
+        <p>Dump raw transcription into a note you never open again</p>
+      </div>
+      <div class="diff-item">
+        <div class="label us">VoiceForge</div>
+        <p>Structures your speech into clean, formatted, paste-ready output</p>
+      </div>
+      <div class="diff-item">
+        <div class="label them">Typical voice apps</div>
+        <p>Mangle your name, your project names, your technical terms</p>
+      </div>
+      <div class="diff-item">
+        <div class="label us">VoiceForge</div>
+        <p>Learns your vocabulary over time and auto-corrects from your personal voice profile</p>
+      </div>
+      <div class="diff-item">
+        <div class="label them">Typical voice apps</div>
+        <p>Only work inside their own app or browser tab</p>
+      </div>
+      <div class="diff-item">
+        <div class="label us">VoiceForge</div>
+        <p>Global hotkey pastes directly into any app you're using. VS Code, Slack, Notion, anywhere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Use Cases -->
+<section class="cases">
+  <div class="container">
+    <h2>Built for people who build things</h2>
+    <div class="cases-grid">
+      <div class="case">
+        <div class="case-who">Founders</div>
+        <h3>Capture ideas between meetings</h3>
+        <p>Voice-dump a product idea while walking to your next call. Get a structured brief in your clipboard by the time you sit down.</p>
+      </div>
+      <div class="case">
+        <div class="case-who">Developers</div>
+        <h3>Dictate to your IDE</h3>
+        <p>Speak code reviews, commit messages, and PR descriptions. Technical terms auto-correct. Pastes right into your editor.</p>
+      </div>
+      <div class="case">
+        <div class="case-who">Creators</div>
+        <h3>Draft content by talking</h3>
+        <p>Blog posts, tweets, newsletters. Talk through your ideas and get a clean first draft without staring at a blank page.</p>
+      </div>
+      <div class="case">
+        <div class="case-who">Operators</div>
+        <h3>Move faster on comms</h3>
+        <p>Respond to Slack threads, write SOPs, document decisions. Speak it once, paste it done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta" id="cta">
+  <div class="container">
+    <h2>Stop losing ideas.<br>Start forging them.</h2>
+    <p>VoiceForge is launching soon. Get on the list for early access.</p>
+    <a href="mailto:hello@usevoiceforge.com" class="btn-primary">Get Early Access</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>VoiceForge &middot; <a href="https://usevoiceforge.com">usevoiceforge.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
