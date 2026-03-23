@@ -9,65 +9,68 @@
 <meta property="og:description" content="Turn spoken ideas into clean notes, structured drafts, and workflow-ready text.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://usevoiceforge.com">
+<meta property="og:image" content="https://usevoiceforge.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VoiceForge - Speak it. Ship it.">
+<meta name="twitter:description" content="Turn spoken ideas into clean notes, structured drafts, and workflow-ready text.">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="theme-color" content="#6366f1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "VoiceForge",
+  "url": "https://usevoiceforge.com",
+  "description": "Turn spoken ideas into usable notes, drafts, and workflow-ready text.",
+  "applicationCategory": "ProductivityApplication",
+  "operatingSystem": "Windows, macOS, Linux",
+  "offers": [
+    {"@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free"},
+    {"@type": "Offer", "price": "7", "priceCurrency": "USD", "name": "Pro"}
+  ]
+}
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#09090b;
-  --surface:#111113;
-  --surface2:#18181b;
-  --border:#27272a;
-  --text:#fafafa;
-  --text2:#a1a1aa;
-  --text3:#71717a;
-  --accent:#6366f1;
-  --accent2:#818cf8;
-  --accent-glow:rgba(99,102,241,0.15);
-  --green:#22c55e;
-  --orange:#f97316;
+  --bg:#09090b;--surface:#111113;--surface2:#18181b;--border:#27272a;
+  --text:#fafafa;--text2:#a1a1aa;--text3:#71717a;
+  --accent:#6366f1;--accent2:#818cf8;--accent-glow:rgba(99,102,241,0.15);
+  --green:#22c55e;--orange:#f97316;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.6;overflow-x:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
 a{color:var(--accent2);text-decoration:none;transition:color 0.15s}
 a:hover{color:var(--text)}
-
 .container{max-width:1080px;margin:0 auto;padding:0 24px}
+.text-center{text-align:center}
 
-/* ── Animations ── */
 @keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse-glow{0%,100%{opacity:0.4}50%{opacity:0.8}}
 .fade-up{animation:fade-up 0.6s ease-out both}
-.delay-1{animation-delay:0.1s}
-.delay-2{animation-delay:0.2s}
-.delay-3{animation-delay:0.3s}
-.delay-4{animation-delay:0.4s}
+.delay-1{animation-delay:0.1s}.delay-2{animation-delay:0.2s}.delay-3{animation-delay:0.3s}.delay-4{animation-delay:0.4s}
+@media(prefers-reduced-motion:reduce){.fade-up{animation:none;opacity:1;transform:none}}
 
-@media(prefers-reduced-motion:reduce){
-  .fade-up{animation:none;opacity:1;transform:none}
-}
-
-/* ── Nav ── */
+/* Nav */
 nav{padding:16px 0;position:sticky;top:0;z-index:100;background:rgba(9,9,11,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 nav .container{display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:20px;font-weight:800;letter-spacing:-0.03em;color:var(--text)}
-.logo span{color:var(--accent2)}
+.logo{font-size:20px;font-weight:900;letter-spacing:-0.03em}.logo span{color:var(--accent2)}
 .nav-cta{padding:10px 24px;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;transition:background 0.15s,transform 0.15s}
 .nav-cta:hover{background:#4f46e5;color:#fff;transform:translateY(-1px)}
 
-/* ── Hero ── */
+/* Hero */
 .hero{padding:120px 0 100px;text-align:center;position:relative}
 .hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:600px;height:600px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;z-index:0}
 .hero .container{position:relative;z-index:1}
-.hero-tag{display:inline-block;padding:6px 16px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);font-size:13px;color:var(--text2);margin-bottom:28px;font-weight:500}
+.hero-tag{display:inline-block;padding:6px 16px;border-radius:100px;background:var(--surface2);border:1px solid var(--border);font-size:13px;color:var(--text2);margin-bottom:28px;font-weight:600}
 .hero h1{font-size:clamp(44px,7vw,80px);font-weight:900;letter-spacing:-0.045em;line-height:1.0;margin-bottom:24px}
-.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent2),#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent2),#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .hero p{font-size:20px;color:var(--text2);max-width:560px;margin:0 auto 44px;line-height:1.65}
 .hero-cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 .btn-primary{display:inline-block;padding:16px 40px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-size:16px;font-weight:700;transition:transform 0.2s,box-shadow 0.2s}
@@ -76,7 +79,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .btn-secondary{display:inline-block;padding:16px 36px;border-radius:12px;background:transparent;color:var(--text);font-size:16px;font-weight:600;border:1px solid var(--border);transition:border-color 0.2s,background 0.2s}
 .btn-secondary:hover{border-color:var(--text3);background:var(--surface2);color:#fff}
 
-/* ── Waveform visual ── */
+/* Waveform */
 .hero-wave{display:flex;gap:3px;justify-content:center;margin-bottom:32px;height:40px;align-items:center}
 .hero-wave .bar{width:4px;border-radius:2px;background:var(--accent2);animation:wave-bar 1.2s ease-in-out infinite}
 .hero-wave .bar:nth-child(1){height:12px;animation-delay:0s}
@@ -90,7 +93,7 @@ nav .container{display:flex;align-items:center;justify-content:space-between}
 .hero-wave .bar:nth-child(9){height:28px;animation-delay:0.1s}
 @keyframes wave-bar{0%,100%{transform:scaleY(0.4);opacity:0.4}50%{transform:scaleY(1);opacity:1}}
 
-/* ── Section shared ── */
+/* Sections */
 section{padding:100px 0}
 .section-border{border-top:1px solid var(--border)}
 .section-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent2);margin-bottom:20px}
@@ -99,14 +102,14 @@ section{padding:100px 0}
 .section-desc{font-size:18px;color:var(--text2);max-width:580px;line-height:1.65;margin-bottom:48px}
 .section-desc.centered{margin-left:auto;margin-right:auto;text-align:center}
 
-/* ── Problem ── */
+/* Problem */
 .problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 .problem-card{padding:32px;border-radius:14px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.2s,transform 0.2s}
 .problem-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.problem-card h3{font-size:18px;font-weight:700;margin-bottom:10px;letter-spacing:-0.01em}
+.problem-card h3{font-size:18px;font-weight:700;margin-bottom:10px}
 .problem-card p{font-size:15px;color:var(--text2);line-height:1.6}
 
-/* ── Value ── */
+/* Value */
 .value-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
 .value-item{padding:32px;border-radius:14px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.2s,transform 0.2s}
 .value-item:hover{border-color:var(--accent);transform:translateY(-2px)}
@@ -114,27 +117,25 @@ section{padding:100px 0}
 .value-item h3{font-size:16px;font-weight:700;margin-bottom:8px}
 .value-item p{font-size:14px;color:var(--text2);line-height:1.55}
 
-/* ── Steps ── */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;position:relative}
-.step{text-align:center;position:relative}
-.step-num{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-size:22px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 4px 16px rgba(99,102,241,0.25)}
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}
+.step{text-align:center}
+.step-num{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 4px 16px rgba(99,102,241,0.25)}
 .step h3{font-size:17px;font-weight:700;margin-bottom:10px}
 .step p{font-size:14px;color:var(--text2);line-height:1.55;max-width:220px;margin:0 auto}
 
-/* ── Differentiation ── */
+/* Differentiation */
 .diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .diff-item{padding:24px 28px;border-radius:12px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.2s}
-.diff-item:hover{border-color:var(--border)}
+.diff-item:hover{border-color:var(--accent)}
 .diff-item .label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .diff-item .label::before{content:'';width:6px;height:6px;border-radius:50%}
-.diff-item .label.them{color:var(--text3)}
-.diff-item .label.them::before{background:var(--text3)}
-.diff-item .label.us{color:var(--green)}
-.diff-item .label.us::before{background:var(--green)}
+.diff-item .label.them{color:var(--text3)}.diff-item .label.them::before{background:var(--text3)}
+.diff-item .label.us{color:var(--green)}.diff-item .label.us::before{background:var(--green)}
 .diff-item p{font-size:15px;color:var(--text2);line-height:1.55}
 @media(max-width:640px){.diff-grid{grid-template-columns:1fr}}
 
-/* ── Use Cases ── */
+/* Use Cases */
 .cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
 .case{padding:32px;border-radius:14px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.2s,transform 0.2s}
 .case:hover{border-color:var(--orange);transform:translateY(-2px)}
@@ -142,7 +143,7 @@ section{padding:100px 0}
 .case h3{font-size:17px;font-weight:700;margin-bottom:10px}
 .case p{font-size:14px;color:var(--text2);line-height:1.55}
 
-/* ── Pricing ── */
+/* Pricing */
 .pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:start}
 .pricing-card{padding:36px 32px;border-radius:16px;background:var(--surface);border:1px solid var(--border);position:relative;transition:border-color 0.2s,transform 0.2s}
 .pricing-card:hover{transform:translateY(-2px)}
@@ -162,26 +163,28 @@ section{padding:100px 0}
 .pricing-alt{text-align:center;margin-top:12px;font-size:13px;color:var(--text3)}
 .pricing-alt a{color:var(--accent2);font-weight:600}
 
-/* ── Social proof ── */
+/* Social proof */
 .proof{text-align:center}
 .proof-logos{display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:0.4;margin-top:32px;font-size:15px;color:var(--text3);font-weight:600;letter-spacing:0.02em}
 
-/* ── Final CTA ── */
+/* Final CTA */
 .final-cta{text-align:center;position:relative}
 .final-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none}
 .final-cta .container{position:relative;z-index:1}
 .final-cta .section-title{margin-bottom:16px}
 .final-cta p{font-size:18px;color:var(--text2);max-width:480px;margin:0 auto 44px}
 
-/* ── Footer ── */
+/* Footer */
 footer{padding:40px 0;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:13px}
-footer a{color:var(--text3)}
-footer a:hover{color:var(--text)}
+footer a{color:var(--text3)}footer a:hover{color:var(--text)}
+footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12px}
+
+/* Focus visible */
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
 
-<!-- Nav -->
 <nav>
   <div class="container">
     <div class="logo">Voice<span>Forge</span></div>
@@ -189,11 +192,10 @@ footer a:hover{color:var(--text)}
   </div>
 </nav>
 
-<!-- Hero -->
 <section class="hero">
   <div class="container">
     <div class="hero-tag fade-up">Voice-first capture for people who build things</div>
-    <div class="hero-wave fade-up delay-1">
+    <div class="hero-wave fade-up delay-1" role="img" aria-label="Audio waveform visualization">
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
@@ -201,13 +203,12 @@ footer a:hover{color:var(--text)}
     <h1 class="fade-up delay-1">Speak it. <em>Ship it.</em></h1>
     <p class="fade-up delay-2">Turn spoken ideas into clean notes, structured drafts, and workflow-ready text. No typing. No cleanup. Just talk and go.</p>
     <div class="hero-cta-row fade-up delay-3">
-      <a href="#cta" class="btn-primary">Get Early Access</a>
+      <a href="#pricing" class="btn-primary">Get Started Free</a>
       <a href="#how" class="btn-secondary">See How It Works</a>
     </div>
   </div>
 </section>
 
-<!-- Problem -->
 <section class="section-border">
   <div class="container">
     <div class="section-label fade-up">The problem</div>
@@ -228,8 +229,7 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- Value Prop -->
-<section class="section-border" style="text-align:center">
+<section class="section-border text-center">
   <div class="container">
     <div class="section-title fade-up">From thought to <em>usable output</em></div>
     <p class="section-desc centered fade-up delay-1">VoiceForge captures what you say and structures it into something you can paste, send, or build on.</p>
@@ -258,11 +258,10 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- How it Works -->
 <section class="section-border" id="how">
   <div class="container">
-    <div class="section-title fade-up" style="text-align:center;margin-bottom:60px">How it works</div>
-    <div class="steps">
+    <div class="section-title text-center fade-up" id="how-title">How it works</div>
+    <div class="steps" aria-labelledby="how-title">
       <div class="step fade-up delay-1">
         <div class="step-num">1</div>
         <h3>Press your hotkey</h3>
@@ -287,76 +286,38 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- Differentiation -->
 <section class="section-border">
   <div class="container">
     <div class="section-title fade-up">Not another transcription app</div>
     <p class="section-desc fade-up delay-1">Most voice tools stop at raw text. VoiceForge starts there.</p>
     <div class="diff-grid">
-      <div class="diff-item fade-up delay-1">
-        <div class="label them">Typical voice apps</div>
-        <p>Dump raw transcription into a note you never open again</p>
-      </div>
-      <div class="diff-item fade-up delay-1">
-        <div class="label us">VoiceForge</div>
-        <p>Structures your speech into clean, formatted, paste-ready output</p>
-      </div>
-      <div class="diff-item fade-up delay-2">
-        <div class="label them">Typical voice apps</div>
-        <p>Mangle your name, your project names, your technical terms</p>
-      </div>
-      <div class="diff-item fade-up delay-2">
-        <div class="label us">VoiceForge</div>
-        <p>Learns your vocabulary over time and auto-corrects from your personal voice profile</p>
-      </div>
-      <div class="diff-item fade-up delay-3">
-        <div class="label them">Typical voice apps</div>
-        <p>Only work inside their own app or browser tab</p>
-      </div>
-      <div class="diff-item fade-up delay-3">
-        <div class="label us">VoiceForge</div>
-        <p>Global hotkey pastes directly into whatever you're using. VS Code, Slack, Notion, anywhere.</p>
-      </div>
+      <div class="diff-item fade-up delay-1"><div class="label them">Typical voice apps</div><p>Dump raw transcription into a note you never open again</p></div>
+      <div class="diff-item fade-up delay-1"><div class="label us">VoiceForge</div><p>Structures your speech into clean, formatted, paste-ready output</p></div>
+      <div class="diff-item fade-up delay-2"><div class="label them">Typical voice apps</div><p>Mangle your name, your project names, your technical terms</p></div>
+      <div class="diff-item fade-up delay-2"><div class="label us">VoiceForge</div><p>Learns your vocabulary over time and auto-corrects from your personal voice profile</p></div>
+      <div class="diff-item fade-up delay-3"><div class="label them">Typical voice apps</div><p>Only work inside their own app or browser tab</p></div>
+      <div class="diff-item fade-up delay-3"><div class="label us">VoiceForge</div><p>Global hotkey pastes directly into whatever you're using. VS Code, Slack, Notion, anywhere.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Use Cases -->
 <section class="section-border">
   <div class="container">
-    <div class="section-title fade-up" style="text-align:center;margin-bottom:48px">Built for people who build things</div>
+    <div class="section-title text-center fade-up">Built for people who build things</div>
     <div class="cases-grid">
-      <div class="case fade-up delay-1">
-        <div class="case-who">Founders</div>
-        <h3>Capture ideas between meetings</h3>
-        <p>Voice-dump a product idea while walking to your next call. Get a structured brief in your clipboard by the time you sit down.</p>
-      </div>
-      <div class="case fade-up delay-2">
-        <div class="case-who">Developers</div>
-        <h3>Dictate to your IDE</h3>
-        <p>Speak code reviews, commit messages, and PR descriptions. Technical terms auto-correct. Pastes right into your editor.</p>
-      </div>
-      <div class="case fade-up delay-3">
-        <div class="case-who">Creators</div>
-        <h3>Draft content by talking</h3>
-        <p>Blog posts, tweets, newsletters. Talk through your ideas and get a clean first draft without the blank page.</p>
-      </div>
-      <div class="case fade-up delay-4">
-        <div class="case-who">Operators</div>
-        <h3>Move faster on comms</h3>
-        <p>Respond to Slack threads, write SOPs, document decisions. Speak it once, paste it done.</p>
-      </div>
+      <div class="case fade-up delay-1"><div class="case-who">Founders</div><h3>Capture ideas between meetings</h3><p>Voice-dump a product idea while walking to your next call. Get a structured brief in your clipboard by the time you sit down.</p></div>
+      <div class="case fade-up delay-2"><div class="case-who">Developers</div><h3>Dictate to your IDE</h3><p>Speak code reviews, commit messages, and PR descriptions. Technical terms auto-correct. Pastes right into your editor.</p></div>
+      <div class="case fade-up delay-3"><div class="case-who">Creators</div><h3>Draft content by talking</h3><p>Blog posts, tweets, newsletters. Talk through your ideas and get a clean first draft without the blank page.</p></div>
+      <div class="case fade-up delay-4"><div class="case-who">Operators</div><h3>Move faster on comms</h3><p>Respond to Slack threads, write SOPs, document decisions. Speak it once, paste it done.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Pricing -->
 <section class="section-border" id="pricing">
   <div class="container">
-    <div class="section-title fade-up" style="text-align:center">Simple pricing</div>
+    <div class="section-title text-center fade-up">Simple pricing</div>
     <p class="section-desc centered fade-up delay-1">Start free. Upgrade when VoiceForge becomes part of your workflow.</p>
     <div class="pricing-grid">
-
       <div class="pricing-card fade-up delay-1">
         <div class="pricing-tier">Free</div>
         <div class="pricing-price">$0</div>
@@ -368,9 +329,8 @@ footer a:hover{color:var(--text)}
           <li>Global hotkey + auto-paste</li>
           <li>Community support</li>
         </ul>
-        <a href="#cta" class="pricing-btn">Get Started Free</a>
+        <a href="https://usevoiceforge.com/download" class="pricing-btn">Download Free</a>
       </div>
-
       <div class="pricing-card popular fade-up delay-2">
         <div class="pricing-popular-badge">Most Popular</div>
         <div class="pricing-tier">Pro</div>
@@ -384,11 +344,10 @@ footer a:hover{color:var(--text)}
           <li>Offline local mode</li>
           <li>Priority support</li>
         </ul>
-        <!-- REPLACE with your Stripe Payment Link for Pro Monthly -->
+        <!-- REPLACE with your Stripe Payment Link -->
         <a href="https://buy.stripe.com/REPLACE_PRO_MONTHLY" class="pricing-btn primary">Start Pro</a>
         <div class="pricing-alt">or <a href="https://buy.stripe.com/REPLACE_PRO_YEARLY">$60/year (save 29%)</a></div>
       </div>
-
       <div class="pricing-card fade-up delay-3">
         <div class="pricing-tier">Team</div>
         <div class="pricing-price">$19</div>
@@ -401,15 +360,13 @@ footer a:hover{color:var(--text)}
           <li>SSO + team management</li>
           <li>Dedicated support</li>
         </ul>
-        <!-- REPLACE with your Stripe Payment Link for Team -->
-        <a href="https://buy.stripe.com/REPLACE_TEAM" class="pricing-btn">Contact Sales</a>
+        <!-- REPLACE with your Stripe Payment Link -->
+        <a href="mailto:team@usevoiceforge.com" class="pricing-btn">Contact Sales</a>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- Social Proof -->
 <section class="section-border proof">
   <div class="container">
     <p class="section-desc centered fade-up">Used by builders, founders, and operators who think faster than they type.</p>
@@ -423,7 +380,6 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- Final CTA -->
 <section class="section-border final-cta" id="cta">
   <div class="container">
     <div class="section-title fade-up">Stop losing ideas.<br>Start forging them.</div>
@@ -432,10 +388,13 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <div class="container">
     <p>VoiceForge &middot; <a href="https://usevoiceforge.com">usevoiceforge.com</a></p>
+    <div class="footer-links">
+      <a href="mailto:hello@usevoiceforge.com">Contact</a>
+      <a href="https://github.com/SubliminalCoding/VoiceForge-App">GitHub</a>
+    </div>
   </div>
 </footer>
 
