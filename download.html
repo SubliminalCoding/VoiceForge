@@ -1,0 +1,221 @@
+<!--
+  STRIPE CONFIGURATION:
+  Configure your Stripe Payment Link to redirect to this page after successful payment.
+  In Stripe Dashboard > Payment Links > your link > After payment > Redirect:
+  Set the URL to: https://usevoiceforge.com/download.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download VoiceForge - You're In!</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="theme-color" content="#6366f1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;--surface:#111113;--surface2:#18181b;--border:#27272a;
+  --text:#fafafa;--text2:#a1a1aa;--text3:#71717a;
+  --accent:#6366f1;--accent2:#818cf8;--accent-glow:rgba(99,102,241,0.15);
+  --green:#22c55e;--orange:#f97316;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+a{color:var(--accent2);text-decoration:none;transition:color 0.15s}
+a:hover{color:var(--text)}
+.container{max-width:760px;margin:0 auto;padding:0 24px}
+
+@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fade-up 0.6s ease-out both}
+.delay-1{animation-delay:0.1s}.delay-2{animation-delay:0.2s}.delay-3{animation-delay:0.3s}.delay-4{animation-delay:0.4s}
+@media(prefers-reduced-motion:reduce){.fade-up{animation:none;opacity:1;transform:none}}
+
+/* Nav */
+nav{padding:16px 0;background:rgba(9,9,11,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+nav .container{display:flex;align-items:center;justify-content:center;max-width:1080px}
+.logo{font-size:20px;font-weight:900;letter-spacing:-0.03em}.logo span{color:var(--accent2)}
+.logo a{color:inherit}.logo a:hover{color:inherit}
+
+/* Hero */
+.dl-hero{padding:80px 0 48px;text-align:center;position:relative}
+.dl-hero::before{content:'';position:absolute;top:40%;left:50%;transform:translate(-50%,-60%);width:600px;height:600px;background:radial-gradient(circle,var(--accent-glow) 0%,transparent 70%);pointer-events:none;z-index:0}
+.dl-hero .container{position:relative;z-index:1}
+.dl-hero .check-icon{width:64px;height:64px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-size:32px;color:#fff;font-weight:900}
+.dl-hero h1{font-size:clamp(32px,5vw,48px);font-weight:900;letter-spacing:-0.04em;line-height:1.1;margin-bottom:16px}
+.dl-hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent2),#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dl-hero p{font-size:18px;color:var(--text2);max-width:480px;margin:0 auto 36px;line-height:1.65}
+
+.dl-btn{display:inline-flex;align-items:center;gap:10px;padding:18px 48px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-size:18px;font-weight:700;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(99,102,241,0.3)}
+.dl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,0.45);color:#fff}
+.dl-btn:active{transform:translateY(0)}
+.dl-btn svg{flex-shrink:0}
+.dl-meta{font-size:13px;color:var(--text3);margin-top:14px}
+
+/* Sections */
+.dl-section{padding:48px 0;border-top:1px solid var(--border)}
+.dl-section-title{font-size:24px;font-weight:900;letter-spacing:-0.03em;margin-bottom:28px}
+
+/* Setup Steps */
+.setup-steps{counter-reset:step;list-style:none}
+.setup-steps li{position:relative;padding:20px 24px 20px 68px;border-radius:12px;background:var(--surface);border:1px solid var(--border);margin-bottom:12px;transition:border-color 0.2s}
+.setup-steps li:hover{border-color:var(--accent)}
+.setup-steps li::before{counter-increment:step;content:counter(step);position:absolute;left:20px;top:20px;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.setup-steps li h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.setup-steps li p{font-size:14px;color:var(--text2);line-height:1.55}
+
+/* Tips */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.tip-card{padding:24px;border-radius:12px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.2s}
+.tip-card:hover{border-color:var(--accent)}
+.tip-card .tip-icon{font-size:24px;margin-bottom:12px}
+.tip-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.tip-card p{font-size:13px;color:var(--text2);line-height:1.55}
+
+/* FAQ */
+.faq-list{list-style:none}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-q{font-size:16px;font-weight:700;margin-bottom:8px;cursor:default}
+.faq-a{font-size:14px;color:var(--text2);line-height:1.65}
+
+/* Support */
+.support-box{padding:32px;border-radius:14px;background:var(--surface);border:1px solid var(--border);text-align:center}
+.support-box p{font-size:15px;color:var(--text2);margin-bottom:16px;line-height:1.6}
+.support-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.support-link{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:14px;font-weight:600;transition:border-color 0.2s,background 0.2s}
+.support-link:hover{border-color:var(--accent);background:var(--border);color:#fff}
+
+/* Footer */
+footer{padding:40px 0;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:13px}
+footer a{color:var(--text3)}footer a:hover{color:var(--text)}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="logo"><a href="/">Voice<span>Forge</span></a></div>
+  </div>
+</nav>
+
+<section class="dl-hero">
+  <div class="container">
+    <div class="check-icon fade-up">&#10003;</div>
+    <h1 class="fade-up delay-1">Thanks for purchasing <em>VoiceForge!</em></h1>
+    <p class="fade-up delay-2">You now have lifetime access. Download the app below and you'll be dictating in under two minutes.</p>
+    <a href="/downloads/VoiceForge-1.0.0-arm64.dmg" class="dl-btn fade-up delay-3">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v10m0 0l-4-4m4 4l4-4"/><path d="M3 15v2h14v-2"/></svg>
+      Download VoiceForge for Mac
+    </a>
+    <div class="dl-meta fade-up delay-4">macOS 13+ &middot; Apple Silicon (arm64) &middot; ~45 MB</div>
+  </div>
+</section>
+
+<section class="dl-section">
+  <div class="container">
+    <div class="dl-section-title fade-up">Setup in 5 steps</div>
+    <ol class="setup-steps">
+      <li class="fade-up delay-1">
+        <h3>Download and install</h3>
+        <p>Open the DMG file above, then drag VoiceForge into your Applications folder.</p>
+      </li>
+      <li class="fade-up delay-1">
+        <h3>Bypass the macOS warning</h3>
+        <p>On first launch, macOS will warn about an unidentified developer. Right-click the app, click <strong>Open</strong>, then click <strong>Open</strong> again to confirm.</p>
+      </li>
+      <li class="fade-up delay-2">
+        <h3>Get your free Groq API key</h3>
+        <p>Create an account at <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a> and generate an API key. It's free.</p>
+      </li>
+      <li class="fade-up delay-2">
+        <h3>Paste your API key</h3>
+        <p>Open VoiceForge settings and paste your Groq API key into the API key field.</p>
+      </li>
+      <li class="fade-up delay-3">
+        <h3>Set your hotkey and start dictating</h3>
+        <p>Pick a global hotkey in settings, then press it anywhere to start talking. Your words hit the clipboard in seconds.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="dl-section">
+  <div class="container">
+    <div class="dl-section-title fade-up">Quick tips</div>
+    <div class="tips-grid">
+      <div class="tip-card fade-up delay-1">
+        <div class="tip-icon">&#9889;</div>
+        <h3>Hotkey anywhere</h3>
+        <p>Your global hotkey works in any app. Press it, speak, and the result pastes right where your cursor was.</p>
+      </div>
+      <div class="tip-card fade-up delay-2">
+        <div class="tip-icon">&#128218;</div>
+        <h3>Voice profile</h3>
+        <p>VoiceForge learns how you speak over time. Names, jargon, and technical terms get more accurate the more you use it.</p>
+      </div>
+      <div class="tip-card fade-up delay-3">
+        <div class="tip-icon">&#128221;</div>
+        <h3>Custom dictionary</h3>
+        <p>Add words, names, and acronyms to your dictionary so they're always transcribed correctly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="dl-section">
+  <div class="container">
+    <div class="dl-section-title fade-up">Frequently asked questions</div>
+    <ul class="faq-list">
+      <li class="faq-item fade-up delay-1">
+        <div class="faq-q">Why does macOS show a warning?</div>
+        <div class="faq-a">VoiceForge is distributed outside the Mac App Store, so macOS Gatekeeper flags it as unidentified. This is normal for indie Mac apps. Right-click the app, choose Open, then confirm. You only need to do this once.</div>
+      </li>
+      <li class="faq-item fade-up delay-2">
+        <div class="faq-q">How do I get a Groq API key?</div>
+        <div class="faq-a">Go to <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a>, sign up for a free account, and create an API key from your dashboard. Groq offers a generous free tier that covers normal usage.</div>
+      </li>
+      <li class="faq-item fade-up delay-3">
+        <div class="faq-q">Is my data private?</div>
+        <div class="faq-a">Yes. VoiceForge processes audio locally on your machine using your own API key. Your recordings and transcriptions are never sent to VoiceForge servers. You control your data completely.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="dl-section">
+  <div class="container">
+    <div class="support-box fade-up">
+      <p>Need help getting set up? We're here for you.</p>
+      <div class="support-links">
+        <a href="mailto:hello@usevoiceforge.com" class="support-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 3l7 5 7-5"/></svg>
+          hello@usevoiceforge.com
+        </a>
+        <a href="https://github.com/SubliminalCoding/VoiceForge-App" class="support-link" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>VoiceForge &middot; <a href="https://usevoiceforge.com">usevoiceforge.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
