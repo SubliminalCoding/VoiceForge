@@ -32,7 +32,9 @@
   "applicationCategory": "ProductivityApplication",
   "operatingSystem": "Windows, macOS, Linux",
   "offers": [
-    {"@type": "Offer", "price": "29.99", "priceCurrency": "USD", "name": "Lifetime License"}
+    {"@type": "Offer", "price": "12.00", "priceCurrency": "USD", "name": "Starter (monthly)", "priceSpecification": {"@type": "UnitPriceSpecification", "billingDuration": "P1M"}},
+    {"@type": "Offer", "price": "29.00", "priceCurrency": "USD", "name": "Pro (monthly)", "priceSpecification": {"@type": "UnitPriceSpecification", "billingDuration": "P1M"}},
+    {"@type": "Offer", "price": "199.00", "priceCurrency": "USD", "name": "Lifetime (BYOK)"}
   ]
 }
 </script>
@@ -133,6 +135,7 @@ section{padding:100px 0}
 .diff-item .label.us{color:var(--green)}.diff-item .label.us::before{background:var(--green)}
 .diff-item p{font-size:15px;color:var(--text2);line-height:1.55}
 @media(max-width:640px){.diff-grid{grid-template-columns:1fr}}
+@media(max-width:840px){.pricing-grid{grid-template-columns:1fr!important;max-width:420px!important}}
 
 /* Use Cases */
 .cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
@@ -202,13 +205,13 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 <nav>
   <div class="container">
     <div class="logo">Voice<span>Forge</span></div>
-    <a href="https://buy.stripe.com/6oUeVdb8idg0aZ9gPMf7i09" class="nav-cta">Get Lifetime Deal &mdash; $29.99</a>
+    <a href="#pricing" class="nav-cta">Start Free Trial</a>
   </div>
 </nav>
 
 <section class="hero">
   <div class="container">
-    <div class="hero-tag fade-up" style="border-color:var(--orange);color:var(--orange)">Early Access &mdash; Lifetime deal for $29.99 (goes to $49)</div>
+    <div class="hero-tag fade-up" style="border-color:var(--green);color:var(--green)">14-day free trial &mdash; no credit card required</div>
     <div class="hero-wave fade-up delay-1" role="img" aria-label="Audio waveform visualization">
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
       <div class="bar"></div><div class="bar"></div><div class="bar"></div>
@@ -217,10 +220,10 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
     <h1 class="fade-up delay-1">Speak it. <em>Ship it.</em></h1>
     <p class="fade-up delay-2">Turn spoken ideas into clean notes, structured drafts, and workflow-ready text. No typing. No cleanup. Just talk and go.</p>
     <div class="hero-cta-row fade-up delay-3">
-      <a href="https://buy.stripe.com/6oUeVdb8idg0aZ9gPMf7i09" class="btn-primary">Get Lifetime Access &mdash; $29.99</a>
+      <a href="#pricing" class="btn-primary">Start Free Trial</a>
       <a href="#how" class="btn-secondary">See How It Works</a>
     </div>
-    <p class="fade-up delay-4" style="margin-top:20px;font-size:14px;color:var(--text3)">One-time purchase. No subscription. All future updates included.</p>
+    <p class="fade-up delay-4" style="margin-top:20px;font-size:14px;color:var(--text3)">Plans from $12/mo. Try every feature free for 14 days.</p>
   </div>
 </section>
 
@@ -331,13 +334,19 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 <section class="section-border" id="pricing">
   <div class="container">
     <div class="section-title text-center fade-up">Simple pricing</div>
-    <p class="section-desc centered fade-up delay-1">One payment. No subscription. Yours forever.</p>
-    <div class="pricing-grid" style="max-width:480px;margin-left:auto;margin-right:auto">
-      <div class="pricing-card popular fade-up delay-1">
-        <div class="pricing-popular-badge">Early Access Deal</div>
-        <div class="pricing-tier">Lifetime License</div>
-        <div class="pricing-price">$29<span style="font-size:20px;color:var(--text3)">.99</span></div>
-        <div class="pricing-period">one-time payment, yours forever</div>
+    <p class="section-desc centered fade-up delay-1">Every plan starts with a 14-day free trial. No credit card required.</p>
+    <div style="text-align:center;margin-bottom:28px" class="fade-up delay-1">
+      <div style="display:inline-flex;background:var(--surface2);border-radius:10px;border:1px solid var(--border);padding:4px;gap:4px" id="billing-toggle">
+        <button onclick="setBilling('monthly')" id="btn-monthly" style="padding:8px 20px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;background:var(--accent);color:#fff;font-family:inherit;transition:all 0.15s">Monthly</button>
+        <button onclick="setBilling('annual')" id="btn-annual" style="padding:8px 20px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:var(--text2);font-family:inherit;transition:all 0.15s">Annual <span style="color:var(--green);font-size:11px;font-weight:700">Save 20%</span></button>
+      </div>
+    </div>
+    <div class="pricing-grid" style="max-width:960px;margin-left:auto;margin-right:auto;grid-template-columns:repeat(3,1fr)">
+      <!-- Starter -->
+      <div class="pricing-card fade-up delay-1">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price" data-monthly="$12" data-annual="$8">$12</div>
+        <div class="pricing-period" data-monthly="/month" data-annual="/mo &middot; billed $96/yr">/month</div>
         <ul class="pricing-features">
           <li>Unlimited transcription</li>
           <li>AI Auto-Rewrite</li>
@@ -346,15 +355,68 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
           <li>Global hotkey + auto-paste</li>
           <li>Bring your own API key (BYOK)</li>
           <li>Offline local mode</li>
-          <li>All future updates included</li>
-          <li>Priority support</li>
+          <li>All updates included</li>
         </ul>
-        <a href="https://buy.stripe.com/6oUeVdb8idg0aZ9gPMf7i09" class="pricing-btn primary">Get Lifetime Access</a>
-        <div class="pricing-alt" style="margin-top:8px;font-size:13px;color:var(--text3)">Limited time. Price goes up to $49 after early access.</div>
+        <a href="https://buy.stripe.com/fZueVdeku0tegjteHEf7i0d" class="pricing-btn" data-monthly="https://buy.stripe.com/fZueVdeku0tegjteHEf7i0d" data-annual="https://buy.stripe.com/aFa9AT4JU8ZK6IT0QOf7i0e">Start Free Trial</a>
+        <div class="pricing-alt">Best for devs who already have API keys</div>
+      </div>
+      <!-- Pro -->
+      <div class="pricing-card popular fade-up delay-2">
+        <div class="pricing-popular-badge">Most Popular</div>
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-price" data-monthly="$29" data-annual="$19">$29</div>
+        <div class="pricing-period" data-monthly="/month" data-annual="/mo &middot; billed $228/yr">/month</div>
+        <ul class="pricing-features">
+          <li>Everything in Starter</li>
+          <li>Managed AI &mdash; no API key needed</li>
+          <li>Just install and talk</li>
+          <li>Generous monthly AI credits</li>
+          <li>Priority support</li>
+          <li>Early access to new features</li>
+        </ul>
+        <a href="https://buy.stripe.com/dRmdR91xIdg06IT430f7i0f" class="pricing-btn primary" data-monthly="https://buy.stripe.com/dRmdR91xIdg06IT430f7i0f" data-annual="https://buy.stripe.com/5kQ28r3FQdg0aZ90QOf7i0g">Start Free Trial</a>
+        <div class="pricing-alt">Most users pick this &mdash; zero setup</div>
+      </div>
+      <!-- Lifetime -->
+      <div class="pricing-card fade-up delay-3">
+        <div class="pricing-tier">Lifetime</div>
+        <div class="pricing-price">$199</div>
+        <div class="pricing-period">one-time payment, yours forever</div>
+        <ul class="pricing-features">
+          <li>Everything in Starter</li>
+          <li>Bring your own API key (BYOK)</li>
+          <li>Offline local mode</li>
+          <li>All future updates</li>
+          <li>Priority support</li>
+          <li>Pay once, use forever</li>
+        </ul>
+        <a href="https://buy.stripe.com/9B65kD6S27VG0kv9nkf7i0h" class="pricing-btn">Get Lifetime Access</a>
+        <div class="pricing-alt">Limited to first 200 users</div>
       </div>
     </div>
   </div>
 </section>
+<script>
+function setBilling(mode){
+  const m=document.getElementById('btn-monthly'),a=document.getElementById('btn-annual');
+  if(mode==='annual'){
+    a.style.background='var(--accent)';a.style.color='#fff';
+    m.style.background='transparent';m.style.color='var(--text2)';
+  }else{
+    m.style.background='var(--accent)';m.style.color='#fff';
+    a.style.background='transparent';a.style.color='var(--text2)';
+  }
+  document.querySelectorAll('.pricing-price[data-monthly]').forEach(el=>{
+    el.textContent=mode==='annual'?el.dataset.annual:el.dataset.monthly;
+  });
+  document.querySelectorAll('.pricing-period[data-monthly]').forEach(el=>{
+    el.innerHTML=mode==='annual'?el.dataset.annual:el.dataset.monthly;
+  });
+  document.querySelectorAll('.pricing-btn[data-monthly]').forEach(el=>{
+    el.href=mode==='annual'?el.dataset.annual:el.dataset.monthly;
+  });
+}
+</script>
 
 <section class="section-border proof">
   <div class="container">
@@ -372,17 +434,13 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 <section class="section-border final-cta" id="cta">
   <div class="container">
     <div class="section-title fade-up">Stop losing ideas.<br>Start forging them.</div>
-    <p class="fade-up delay-1">Lock in the lifetime deal before early access ends.</p>
+    <p class="fade-up delay-1">Try every feature free for 14 days. Pick a plan when you're ready.</p>
     <div class="deal-banner fade-up delay-2">
-      <div class="deal-flag">Limited Early Access</div>
-      <h3>Lifetime license. <em>One payment. Forever.</em></h3>
-      <div class="deal-price-row">
-        <span class="deal-original">$49</span>
-        <span class="deal-now">$29.99</span>
-      </div>
-      <div class="deal-sub">Unlimited transcription, all future updates, yours forever.</div>
-      <a href="https://buy.stripe.com/6oUeVdb8idg0aZ9gPMf7i09" class="deal-btn">Get Lifetime Access</a>
-      <div class="deal-fine">One-time payment. No subscription. Price increases after early access.</div>
+      <div class="deal-flag">14-Day Free Trial</div>
+      <h3>No credit card. <em>No commitment.</em></h3>
+      <div class="deal-sub" style="margin-top:12px">Start with the full Pro experience. Downgrade, upgrade, or cancel anytime.</div>
+      <a href="#pricing" class="deal-btn">Start Free Trial</a>
+      <div class="deal-fine">Plans from $12/mo (BYOK) or $29/mo (managed). Annual saves 20%.</div>
     </div>
   </div>
 </section>
