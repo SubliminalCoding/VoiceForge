@@ -1,0 +1,46 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<title id="title">VoiceForge social preview</title>
+<desc id="desc">VoiceForge turns spoken ideas into clean, workflow-ready text.</desc>
+<rect width="1200" height="630" fill="#09090B"/>
+<circle cx="238" cy="116" r="220" fill="url(#glowTop)"/>
+<circle cx="1040" cy="570" r="260" fill="url(#glowBottom)"/>
+<rect x="78" y="74" width="1044" height="482" rx="34" fill="#111113" stroke="#27272A" stroke-width="2"/>
+<rect x="132" y="142" width="322" height="28" rx="14" fill="#18181B"/>
+<rect x="132" y="192" width="520" height="34" rx="17" fill="#18181B"/>
+<rect x="132" y="248" width="400" height="16" rx="8" fill="#18181B"/>
+<rect x="132" y="276" width="464" height="16" rx="8" fill="#18181B"/>
+<rect x="132" y="304" width="376" height="16" rx="8" fill="#18181B"/>
+<rect x="132" y="392" width="260" height="70" rx="20" fill="url(#button)"/>
+<text x="132" y="154" fill="#818CF8" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Speak it. Ship it.</text>
+<text x="132" y="224" fill="#FAFAFA" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="900">VoiceForge</text>
+<text x="132" y="364" fill="#A1A1AA" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="500">Turn spoken ideas into clean, workflow-ready text.</text>
+<text x="172" y="436" fill="#FFFFFF" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">14-day free trial</text>
+<g transform="translate(782 136)">
+<rect width="220" height="320" rx="28" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+<rect x="28" y="32" width="164" height="40" rx="20" fill="#111827"/>
+<g transform="translate(42 118)">
+<rect x="0" y="62" width="18" height="64" rx="9" fill="#818CF8"/>
+<rect x="28" y="32" width="18" height="124" rx="9" fill="#A78BFA"/>
+<rect x="56" y="0" width="18" height="188" rx="9" fill="#C084FC"/>
+<rect x="84" y="48" width="18" height="92" rx="9" fill="#818CF8"/>
+<rect x="112" y="20" width="18" height="148" rx="9" fill="#A78BFA"/>
+<rect x="140" y="74" width="18" height="48" rx="9" fill="#C084FC"/>
+</g>
+<rect x="28" y="270" width="164" height="22" rx="11" fill="#111827"/>
+</g>
+<text x="132" y="514" fill="#71717A" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="500">usevoiceforge.com</text>
+<defs>
+<radialGradient id="glowTop" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(238 116) rotate(90) scale(220)">
+<stop stop-color="#6366F1" stop-opacity="0.26"/>
+<stop offset="1" stop-color="#6366F1" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="glowBottom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1040 570) rotate(90) scale(260)">
+<stop stop-color="#C084FC" stop-opacity="0.22"/>
+<stop offset="1" stop-color="#C084FC" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="button" x1="132" y1="392" x2="392" y2="462" gradientUnits="userSpaceOnUse">
+<stop stop-color="#6366F1"/>
+<stop offset="1" stop-color="#4F46E5"/>
+</linearGradient>
+</defs>
+</svg>
