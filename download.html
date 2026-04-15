@@ -21,9 +21,30 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="theme-color" content="#6366f1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<!-- ─── Google Analytics 4 (same Measurement ID as the marketing page) -->
+<script>
+  window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // <-- paste your ID here
+  window.__gaEnabled = location.hostname.endsWith('usevoiceforge.com')
+    && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX';
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  if (window.__gaEnabled) {
+    gtag('js', new Date());
+    gtag('config', window.GA_MEASUREMENT_ID, { send_page_view: true, anonymize_ip: true });
+    // Mark this view as the post-purchase landing — useful in funnel reports.
+    gtag('event', 'download_page_view', { source: document.referrer || 'direct' });
+  }
+</script>
+<!-- ─────────────────────────────────────────────────────────────────── -->
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -403,6 +424,43 @@ document.getElementById('footer-year').textContent = String(new Date().getFullYe
     });
 })();
 </script>
+
+<!-- ─── GA4 funnel events for the download page ───────────────────── -->
+<script>
+(function setupDownloadAnalytics() {
+  function track(eventName, params) {
+    if (!window.__gaEnabled || typeof gtag !== 'function') return;
+    gtag('event', eventName, params || {});
+  }
+
+  // Download click — captures which platform the user picked.
+  function trackDownload(el) {
+    var platform = el.getAttribute('data-platform') || (el.id === 'dl-primary' ? 'primary' : 'unknown');
+    var url = el.getAttribute('href') || '';
+    track('download_click', {
+      platform: platform,
+      url: url,
+      filename: url.split('/').pop()
+    });
+  }
+  document.addEventListener('click', function(e) {
+    var dl = e.target.closest('#dl-primary, .dl-other-btn');
+    if (dl) trackDownload(dl);
+  });
+
+  // FAQ open — log which question the user expanded.
+  document.querySelectorAll('details.faq-details').forEach(function(d) {
+    d.addEventListener('toggle', function() {
+      if (!d.open) return;
+      var summary = d.querySelector('summary');
+      track('faq_open', {
+        question: summary ? summary.textContent.trim().slice(0, 80) : 'unknown'
+      });
+    });
+  });
+})();
+</script>
+<!-- ─────────────────────────────────────────────────────────────────── -->
 
 </body>
 </html>

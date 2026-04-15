@@ -9,11 +9,17 @@
 <meta property="og:description" content="Turn spoken ideas into clean notes, structured drafts, and workflow-ready text.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://usevoiceforge.com">
-<meta property="og:image" content="https://usevoiceforge.com/og-image.svg">
+<meta property="og:image" content="https://usevoiceforge.com/og-image.png">
+<meta property="og:image:secure_url" content="https://usevoiceforge.com/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="VoiceForge — turn spoken ideas into clean text">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="VoiceForge - Speak it. Ship it.">
 <meta name="twitter:description" content="Turn spoken ideas into clean notes, structured drafts, and workflow-ready text.">
-<meta name="twitter:image" content="https://usevoiceforge.com/og-image.svg">
+<meta name="twitter:image" content="https://usevoiceforge.com/og-image.png">
+<meta name="twitter:image:alt" content="VoiceForge — turn spoken ideas into clean text">
 <link rel="canonical" href="https://usevoiceforge.com">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -21,9 +27,35 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="theme-color" content="#6366f1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(self &quot;https://buy.stripe.com&quot;)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<!-- ─── Google Analytics 4 ───────────────────────────────────────────
+     Replace G-XXXXXXXXXX with the Measurement ID from
+     analytics.google.com → Admin → Data Streams → your web stream.
+     The placeholder makes the snippet a no-op; once filled in, page
+     views + the custom events at the bottom of <body> start flowing.
+
+     Skip GA in dev so localhost/file:// loads don't pollute reports.
+-->
+<script>
+  window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // <-- paste your ID here
+  window.__gaEnabled = location.hostname.endsWith('usevoiceforge.com')
+    && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX';
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  if (window.__gaEnabled) {
+    gtag('js', new Date());
+    gtag('config', window.GA_MEASUREMENT_ID, { send_page_view: true, anonymize_ip: true });
+  }
+</script>
+<!-- ───────────────────────────────────────────────────────────────── -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -459,7 +491,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 
 <section class="section-border proof">
   <div class="container">
-    <p class="section-desc centered fade-up">Used by builders, founders, and operators who think faster than they type.</p>
+    <p class="section-desc centered fade-up">Built for builders, founders, and operators who think faster than they type.</p>
     <div class="proof-logos fade-up delay-1">
       <span>YC Founders</span>
       <span>Indie Hackers</span>
@@ -501,6 +533,84 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 // Auto-roll the footer year so we don't ship stale copyright in 2027.
 document.getElementById('footer-year').textContent = String(new Date().getFullYear());
 </script>
+
+<!-- ─── GA4 funnel-event tracking ─────────────────────────────────────
+     No-op when window.__gaEnabled is false (dev / placeholder ID).
+     Fires custom events for the conversion funnel:
+       - cta_click (generic) with location + destination
+       - billing_toggle (monthly/annual)
+       - scroll_depth (25/50/75/100)
+       - pricing_view (first time pricing section enters viewport)
+     Plus pass-through to gtag('event', name, params).
+-->
+<script>
+(function setupAnalytics() {
+  function track(eventName, params) {
+    if (!window.__gaEnabled || typeof gtag !== 'function') return;
+    gtag('event', eventName, params || {});
+  }
+
+  // CTA clicks — covers nav, hero, pricing, deal-banner. Each anchor
+  // gets its location (closest section id) and destination URL logged.
+  function locationOf(el) {
+    var section = el.closest('section, nav, footer');
+    return (section && section.id) ? section.id : (section ? section.tagName.toLowerCase() : 'unknown');
+  }
+  document.querySelectorAll('a.btn-primary, a.btn-secondary, a.nav-cta, a.pricing-btn, a.deal-btn').forEach(function(a) {
+    a.addEventListener('click', function() {
+      track('cta_click', {
+        location: locationOf(a),
+        destination: a.getAttribute('href') || '',
+        text: (a.textContent || '').trim().slice(0, 60),
+        is_stripe: /buy\.stripe\.com/.test(a.getAttribute('href') || '')
+      });
+    });
+  });
+
+  // Billing toggle — fires when user switches Monthly ↔ Annual.
+  ['btn-monthly', 'btn-annual'].forEach(function(id) {
+    var btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      track('billing_toggle', { billing: id === 'btn-annual' ? 'annual' : 'monthly' });
+    });
+  });
+
+  // Scroll depth — quartiles. Fires once per threshold per page load.
+  var fired = {};
+  function onScroll() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    var pct = Math.round((scrollTop / docHeight) * 100);
+    [25, 50, 75, 100].forEach(function(threshold) {
+      if (pct >= threshold && !fired[threshold]) {
+        fired[threshold] = true;
+        track('scroll_depth', { percent: threshold });
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Pricing section view — fires the first time #pricing enters viewport.
+  // Useful as a mid-funnel signal between page-view and cta_click.
+  var pricingEl = document.getElementById('pricing');
+  if (pricingEl && 'IntersectionObserver' in window) {
+    var seen = false;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting && !seen) {
+          seen = true;
+          track('pricing_view', {});
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+    obs.observe(pricingEl);
+  }
+})();
+</script>
+<!-- ─────────────────────────────────────────────────────────────────── -->
 
 </body>
 </html>
