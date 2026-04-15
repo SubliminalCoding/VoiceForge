@@ -34,19 +34,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 
 <!-- ─── Google Analytics 4 ───────────────────────────────────────────
-     Replace G-XXXXXXXXXX with the Measurement ID from
-     analytics.google.com → Admin → Data Streams → your web stream.
-     The placeholder makes the snippet a no-op; once filled in, page
-     views + the custom events at the bottom of <body> start flowing.
-
-     Skip GA in dev so localhost/file:// loads don't pollute reports.
+     Measurement ID lives at analytics.google.com → Admin → Data Streams.
+     Gated on hostname so localhost / file:// page loads don't pollute
+     production reports.
 -->
 <script>
-  window.GA_MEASUREMENT_ID = 'G-XXXXXXXXXX'; // <-- paste your ID here
-  window.__gaEnabled = location.hostname.endsWith('usevoiceforge.com')
-    && window.GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX';
+  window.GA_MEASUREMENT_ID = 'G-LR325TGZCM';
+  window.__gaEnabled = location.hostname.endsWith('usevoiceforge.com');
 </script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LR325TGZCM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
