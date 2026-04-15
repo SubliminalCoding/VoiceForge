@@ -28,15 +28,23 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#09090b;--surface:#111113;--surface2:#18181b;--border:#27272a;
-  --text:#fafafa;--text2:#a1a1aa;--text3:#71717a;
+  --text:#fafafa;--text2:#a1a1aa;--text3:#8a8a92;
   --accent:#6366f1;--accent2:#818cf8;--accent-glow:rgba(99,102,241,0.15);
   --green:#22c55e;--orange:#f97316;
 }
 html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
 a{color:var(--accent2);text-decoration:none;transition:color 0.15s}
 a:hover{color:var(--text)}
 .container{max-width:760px;margin:0 auto;padding:0 24px}
+
+/* Visually-hidden helper */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Skip-link */
+.skip-link{position:absolute;top:-100px;left:16px;z-index:1000;padding:10px 18px;border-radius:8px;background:var(--accent);color:#fff;font-size:14px;font-weight:700;transition:top 0.15s ease}
+.skip-link:focus{top:12px;color:#fff}
 
 @keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .fade-up{animation:fade-up 0.6s ease-out both}
@@ -121,20 +129,38 @@ footer{padding:40px 0;border-top:1px solid var(--border);text-align:center;color
 footer a{color:var(--text3)}footer a:hover{color:var(--text)}
 footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12px;flex-wrap:wrap}
 
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+:focus-visible{outline:2px solid var(--accent2);outline-offset:3px;border-radius:4px}
+.dl-btn:focus-visible{outline-color:#fff;box-shadow:0 0 0 4px rgba(99,102,241,0.45)}
+
+/* FAQ — collapsible details/summary with custom chevron */
+.faq-details{border-bottom:1px solid var(--border);padding:0}
+.faq-details:first-child{border-top:1px solid var(--border)}
+.faq-details summary{list-style:none;padding:20px 32px 20px 0;cursor:pointer;font-size:16px;font-weight:700;position:relative;transition:color 0.15s}
+.faq-details summary::-webkit-details-marker{display:none}
+.faq-details summary::after{content:'';position:absolute;right:8px;top:50%;width:10px;height:10px;border-right:2px solid var(--text3);border-bottom:2px solid var(--text3);transform:translateY(-75%) rotate(45deg);transition:transform 0.2s ease,border-color 0.15s}
+.faq-details[open] summary::after{transform:translateY(-25%) rotate(-135deg);border-color:var(--accent2)}
+.faq-details summary:hover{color:var(--accent2)}
+.faq-details summary:hover::after{border-color:var(--accent2)}
+.faq-details .faq-a{font-size:14px;color:var(--text2);line-height:1.65;padding:0 32px 20px 0;animation:faq-open 0.18s ease-out}
+@keyframes faq-open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.faq-details .faq-a{animation:none}}
 </style>
 </head>
 <body>
 
-<nav>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav aria-label="Primary">
   <div class="container">
-    <div class="logo"><a href="/">Voice<span>Forge</span></a></div>
+    <a href="/" class="logo" aria-label="VoiceForge home">Voice<span>Forge</span></a>
   </div>
 </nav>
 
+<main id="main">
+
 <section class="dl-hero">
   <div class="container">
-    <div class="check-icon fade-up">&#10003;</div>
+    <div class="check-icon fade-up" aria-hidden="true">&#10003;</div>
     <h1 class="fade-up delay-1">Thanks for purchasing <em>VoiceForge!</em></h1>
     <p class="fade-up delay-2">Pick your platform and you'll be dictating in under two minutes.</p>
 
@@ -159,7 +185,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 
 <section class="dl-section">
   <div class="container">
-    <div class="dl-section-title fade-up">Setup in a few steps</div>
+    <h2 class="dl-section-title fade-up">Setup in a few steps</h2>
     <ol class="setup-steps">
       <li class="fade-up delay-1">
         <h3>Download and install</h3>
@@ -191,7 +217,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 
 <section class="dl-section">
   <div class="container">
-    <div class="dl-section-title fade-up">Quick tips</div>
+    <h2 class="dl-section-title fade-up">Quick tips</h2>
     <div class="tips-grid">
       <div class="tip-card fade-up delay-1">
         <div class="tip-icon">&#9889;</div>
@@ -214,25 +240,25 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 
 <section class="dl-section">
   <div class="container">
-    <div class="dl-section-title fade-up">Frequently asked questions</div>
-    <ul class="faq-list">
-      <li class="faq-item fade-up delay-1">
-        <div class="faq-q">Why does macOS show a warning on first launch?</div>
+    <h2 class="dl-section-title fade-up">Frequently asked questions</h2>
+    <div class="faq-list">
+      <details class="faq-details fade-up delay-1">
+        <summary>Why does macOS show a warning on first launch?</summary>
         <div class="faq-a">VoiceForge is signed with an Apple Developer ID but not yet notarized through Apple's automated checks. Gatekeeper still flags signed-but-not-notarized apps as a precaution. Right-click the app, choose Open, then confirm. One-time only. Notarization is on the roadmap.</div>
-      </li>
-      <li class="faq-item fade-up delay-2">
-        <div class="faq-q">Why does Windows show a SmartScreen warning?</div>
-        <div class="faq-a">VoiceForge is signed by SSL.com, but Windows SmartScreen builds publisher reputation incrementally as more users install signed software. The warning disappears automatically once enough installs accumulate. Click <strong>More info → Run anyway</strong> in the meantime.</div>
-      </li>
-      <li class="faq-item fade-up delay-3">
-        <div class="faq-q">How do I get a Groq API key?</div>
+      </details>
+      <details class="faq-details fade-up delay-2">
+        <summary>Why does Windows show a SmartScreen warning?</summary>
+        <div class="faq-a">VoiceForge is signed by SSL.com, but Windows SmartScreen builds publisher reputation incrementally as more users install signed software. The warning disappears automatically once enough installs accumulate. Click <strong>More info &rarr; Run anyway</strong> in the meantime.</div>
+      </details>
+      <details class="faq-details fade-up delay-3">
+        <summary>How do I get a Groq API key?</summary>
         <div class="faq-a">Go to <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a>, sign up for a free account, and create an API key from your dashboard. Groq's free tier covers normal personal usage.</div>
-      </li>
-      <li class="faq-item fade-up delay-4">
-        <div class="faq-q">Is my data private?</div>
+      </details>
+      <details class="faq-details fade-up delay-4">
+        <summary>Is my data private?</summary>
         <div class="faq-a">Yes. VoiceForge sends your audio directly from your machine to Groq using your own API key. Recordings and transcriptions are never sent to VoiceForge servers. You control your data.</div>
-      </li>
-    </ul>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -250,18 +276,24 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="container">
-    <p>VoiceForge &middot; <a href="https://usevoiceforge.com">usevoiceforge.com</a></p>
-    <div class="footer-links">
-      <a href="https://github.com/SubliminalCoding/VoiceForge-App">GitHub</a>
-      <a href="https://www.redwooddigitalfrederick.com/terms.html">Terms</a>
-      <a href="https://www.redwooddigitalfrederick.com/privacy.html">Privacy</a>
-      <a href="https://www.redwooddigitalfrederick.com/refund.html">Refunds</a>
-    </div>
+    <p>&copy; <span id="footer-year">2026</span> Redwood Digital, LLC &middot; <a href="https://usevoiceforge.com">usevoiceforge.com</a></p>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="https://github.com/SubliminalCoding/VoiceForge-App" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.redwooddigitalfrederick.com/terms.html" target="_blank" rel="noopener">Terms</a>
+      <a href="https://www.redwooddigitalfrederick.com/privacy.html" target="_blank" rel="noopener">Privacy</a>
+      <a href="https://www.redwooddigitalfrederick.com/refund.html" target="_blank" rel="noopener">Refunds</a>
+    </nav>
   </div>
 </footer>
 
+<script>
+// Auto-roll the footer copyright year so we don't ship stale text in 2027.
+document.getElementById('footer-year').textContent = String(new Date().getFullYear());
+</script>
 <script>
 // Hydrate download buttons from the latest GitHub release.
 // No version bump on this page is needed when we ship a new release —
