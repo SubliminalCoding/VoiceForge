@@ -127,7 +127,8 @@ body.is-unknown .platform-only{display:block}
 .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
 .tip-card{padding:24px;border-radius:12px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.2s}
 .tip-card:hover{border-color:var(--accent)}
-.tip-card .tip-icon{font-size:24px;margin-bottom:12px}
+.tip-card .tip-icon{margin-bottom:12px;color:var(--accent2);width:32px;height:32px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.tip-card .tip-icon svg{width:18px;height:18px;display:block}
 .tip-card h3{font-size:15px;font-weight:700;margin-bottom:6px}
 .tip-card p{font-size:13px;color:var(--text2);line-height:1.55}
 
@@ -241,17 +242,23 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
     <h2 class="dl-section-title fade-up">Quick tips</h2>
     <div class="tips-grid">
       <div class="tip-card fade-up delay-1">
-        <div class="tip-icon">&#9889;</div>
+        <div class="tip-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
+        </div>
         <h3>Hotkey anywhere</h3>
         <p>Your global hotkey works in any app. Press it, speak, and the result pastes right where your cursor was.</p>
       </div>
       <div class="tip-card fade-up delay-2">
-        <div class="tip-icon">&#128218;</div>
+        <div class="tip-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+        </div>
         <h3>Voice profile</h3>
         <p>VoiceForge learns how you speak over time. Names, jargon, and technical terms get more accurate the more you use it.</p>
       </div>
       <div class="tip-card fade-up delay-3">
-        <div class="tip-icon">&#128221;</div>
+        <div class="tip-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
         <h3>Custom dictionary</h3>
         <p>Add words, names, and acronyms to your dictionary so they're always transcribed correctly.</p>
       </div>
