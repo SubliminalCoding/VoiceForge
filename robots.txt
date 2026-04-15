@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /download.html
+
+# /download.html is post-purchase only; we don't want it indexed and
+# the page itself also sets <meta name="robots" content="noindex">.
+
+Sitemap: https://usevoiceforge.com/sitemap.xml

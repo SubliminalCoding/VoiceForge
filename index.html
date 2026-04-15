@@ -441,7 +441,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
         <div class="pricing-alt"><span class="pricing-cap">Founding-customer pricing</span></div>
       </div>
     </div>
-    <p class="section-desc centered fade-up delay-3" style="margin-top:32px;font-size:14px;color:var(--text3)">A managed-AI tier (no API key required) is on the roadmap. <a href="#" style="color:var(--accent2);font-weight:600">Join the waitlist</a> to be notified when it launches.</p>
+    <p class="section-desc centered fade-up delay-3" style="margin-top:32px;font-size:14px;color:var(--text3)">A managed-AI tier (no API key required) is on the roadmap. <a href="mailto:hello@usevoiceforge.com?subject=Managed-AI%20waitlist&amp;body=Hi%20%E2%80%94%20please%20notify%20me%20when%20the%20managed-AI%20tier%20launches.%0A%0AThanks!" class="waitlist-link" style="color:var(--accent2);font-weight:600">Email us to join the waitlist</a> and we'll notify you when it launches.</p>
   </div>
 </section>
 <script>
@@ -552,7 +552,7 @@ document.getElementById('footer-year').textContent = String(new Date().getFullYe
     var section = el.closest('section, nav, footer');
     return (section && section.id) ? section.id : (section ? section.tagName.toLowerCase() : 'unknown');
   }
-  document.querySelectorAll('a.btn-primary, a.btn-secondary, a.nav-cta, a.pricing-btn, a.deal-btn').forEach(function(a) {
+  document.querySelectorAll('a.btn-primary, a.btn-secondary, a.nav-cta, a.pricing-btn, a.deal-btn, a.waitlist-link').forEach(function(a) {
     a.addEventListener('click', function() {
       track('cta_click', {
         location: locationOf(a),
