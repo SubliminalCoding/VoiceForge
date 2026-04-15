@@ -32,10 +32,9 @@
   "url": "https://usevoiceforge.com",
   "description": "Turn spoken ideas into usable notes, drafts, and workflow-ready text.",
   "applicationCategory": "ProductivityApplication",
-  "operatingSystem": "macOS",
+  "operatingSystem": ["macOS", "Windows", "Linux"],
   "offers": [
-    {"@type": "Offer", "price": "12.00", "priceCurrency": "USD", "name": "Starter (monthly)", "priceSpecification": {"@type": "UnitPriceSpecification", "billingDuration": "P1M"}},
-    {"@type": "Offer", "price": "29.00", "priceCurrency": "USD", "name": "Pro (monthly)", "priceSpecification": {"@type": "UnitPriceSpecification", "billingDuration": "P1M"}},
+    {"@type": "Offer", "price": "12.00", "priceCurrency": "USD", "name": "Starter (monthly, BYOK)", "priceSpecification": {"@type": "UnitPriceSpecification", "billingDuration": "P1M"}},
     {"@type": "Offer", "price": "199.00", "priceCurrency": "USD", "name": "Lifetime (BYOK)"}
   ]
 }
@@ -343,9 +342,10 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
         <button onclick="setBilling('annual')" id="btn-annual" style="padding:8px 20px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;background:transparent;color:var(--text2);font-family:inherit;transition:all 0.15s">Annual <span style="color:var(--green);font-size:11px;font-weight:700">Save 20%</span></button>
       </div>
     </div>
-    <div class="pricing-grid" style="max-width:960px;margin-left:auto;margin-right:auto;grid-template-columns:repeat(3,1fr)">
+    <div class="pricing-grid" style="max-width:720px;margin-left:auto;margin-right:auto;grid-template-columns:repeat(2,1fr)">
       <!-- Starter -->
-      <div class="pricing-card fade-up delay-1">
+      <div class="pricing-card popular fade-up delay-1">
+        <div class="pricing-popular-badge">Most Popular</div>
         <div class="pricing-tier">Starter</div>
         <div class="pricing-price" data-monthly="$12" data-annual="$8">$12</div>
         <div class="pricing-period" data-monthly="/month" data-annual="/mo &middot; billed $96/yr">/month</div>
@@ -359,28 +359,11 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
           <li>Offline local mode</li>
           <li>All updates included</li>
         </ul>
-        <a href="https://buy.stripe.com/fZueVdeku0tegjteHEf7i0d" class="pricing-btn" data-monthly="https://buy.stripe.com/fZueVdeku0tegjteHEf7i0d" data-annual="https://buy.stripe.com/aFa9AT4JU8ZK6IT0QOf7i0e">Start Free Trial</a>
-        <div class="pricing-alt">Best for devs who already have API keys</div>
-      </div>
-      <!-- Pro -->
-      <div class="pricing-card popular fade-up delay-2">
-        <div class="pricing-popular-badge">Most Popular</div>
-        <div class="pricing-tier">Pro</div>
-        <div class="pricing-price" data-monthly="$29" data-annual="$19">$29</div>
-        <div class="pricing-period" data-monthly="/month" data-annual="/mo &middot; billed $228/yr">/month</div>
-        <ul class="pricing-features">
-          <li>Everything in Starter</li>
-          <li>Managed AI &mdash; no API key needed</li>
-          <li>Just install and talk</li>
-          <li>Generous monthly AI credits</li>
-          <li>Priority support</li>
-          <li>Early access to new features</li>
-        </ul>
-        <a href="https://buy.stripe.com/dRmdR91xIdg06IT430f7i0f" class="pricing-btn primary" data-monthly="https://buy.stripe.com/dRmdR91xIdg06IT430f7i0f" data-annual="https://buy.stripe.com/5kQ28r3FQdg0aZ90QOf7i0g">Start Free Trial</a>
-        <div class="pricing-alt">Most users pick this &mdash; zero setup</div>
+        <a href="https://buy.stripe.com/fZueVdeku0tegjteHEf7i0d" class="pricing-btn primary" data-monthly="https://buy.stripe.com/fZueVdeku0tegjteHEf7i0d" data-annual="https://buy.stripe.com/aFa9AT4JU8ZK6IT0QOf7i0e">Start Free Trial</a>
+        <div class="pricing-alt">14-day free trial &middot; cancel anytime</div>
       </div>
       <!-- Lifetime -->
-      <div class="pricing-card fade-up delay-3">
+      <div class="pricing-card fade-up delay-2">
         <div class="pricing-tier">Lifetime</div>
         <div class="pricing-price">$199</div>
         <div class="pricing-period">one-time payment, yours forever</div>
@@ -396,6 +379,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
         <div class="pricing-alt">Limited to first 200 users</div>
       </div>
     </div>
+    <p class="section-desc centered fade-up delay-3" style="margin-top:32px;font-size:14px;color:var(--text3)">A managed-AI tier (no API key required) is on the roadmap. <a href="#" style="color:var(--accent2);font-weight:600">Join the waitlist</a> to be notified when it launches.</p>
   </div>
 </section>
 <script>
@@ -440,9 +424,9 @@ function setBilling(mode){
     <div class="deal-banner fade-up delay-2">
       <div class="deal-flag">14-Day Free Trial</div>
       <h3>No credit card. <em>No commitment.</em></h3>
-      <div class="deal-sub" style="margin-top:12px">Start with the full Pro experience. Downgrade, upgrade, or cancel anytime.</div>
+      <div class="deal-sub" style="margin-top:12px">Try every feature for 14 days. Cancel anytime, no questions asked.</div>
       <a href="#pricing" class="deal-btn">Start Free Trial</a>
-      <div class="deal-fine">Plans from $12/mo (BYOK) or $29/mo (managed). Annual saves 20%.</div>
+      <div class="deal-fine">$12/mo (BYOK) or $199 lifetime. Annual saves 20%.</div>
     </div>
   </div>
 </section>

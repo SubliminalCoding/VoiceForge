@@ -1,8 +1,11 @@
 <!--
   STRIPE CONFIGURATION:
-  Configure your Stripe Payment Link to redirect to this page after successful payment.
-  In Stripe Dashboard > Payment Links > your link > After payment > Redirect:
+  Configure your Stripe Payment Link to redirect here after successful payment.
+  Stripe Dashboard > Payment Links > your link > After payment > Redirect:
   Set the URL to: https://usevoiceforge.com/download.html
+
+  Download URLs are auto-fetched from the latest GitHub release at page load,
+  so no version bumps are needed here when shipping a new version of the app.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -55,11 +58,21 @@ nav .container{display:flex;align-items:center;justify-content:center;max-width:
 .dl-hero h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent2),#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .dl-hero p{font-size:18px;color:var(--text2);max-width:480px;margin:0 auto 36px;line-height:1.65}
 
-.dl-btn{display:inline-flex;align-items:center;gap:10px;padding:18px 48px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-size:18px;font-weight:700;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(99,102,241,0.3)}
+.dl-btn{display:inline-flex;align-items:center;gap:10px;padding:18px 48px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-size:18px;font-weight:700;transition:transform 0.2s,box-shadow 0.2s,opacity 0.2s;box-shadow:0 4px 20px rgba(99,102,241,0.3)}
 .dl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,102,241,0.45);color:#fff}
 .dl-btn:active{transform:translateY(0)}
+.dl-btn[aria-disabled="true"]{opacity:0.55;pointer-events:none;cursor:wait}
 .dl-btn svg{flex-shrink:0}
 .dl-meta{font-size:13px;color:var(--text3);margin-top:14px}
+
+/* Other-platforms grid */
+.dl-other-wrap{margin-top:40px}
+.dl-other-label{font-size:13px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px}
+.dl-other-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;max-width:560px;margin:0 auto}
+.dl-other-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:13px;font-weight:600;transition:border-color 0.15s,background 0.15s,transform 0.15s}
+.dl-other-btn:hover{border-color:var(--accent);background:var(--border);color:#fff;transform:translateY(-1px)}
+.dl-other-btn.is-current{border-color:var(--accent);background:rgba(99,102,241,0.08)}
+.dl-other-btn[aria-disabled="true"]{opacity:0.4;pointer-events:none}
 
 /* Sections */
 .dl-section{padding:48px 0;border-top:1px solid var(--border)}
@@ -72,6 +85,14 @@ nav .container{display:flex;align-items:center;justify-content:center;max-width:
 .setup-steps li::before{counter-increment:step;content:counter(step);position:absolute;left:20px;top:20px;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#4f46e5);color:#fff;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center}
 .setup-steps li h3{font-size:16px;font-weight:700;margin-bottom:4px}
 .setup-steps li p{font-size:14px;color:var(--text2);line-height:1.55}
+
+/* Per-platform conditional rows inside the steps list */
+.platform-only{display:none}
+body.is-mac .platform-only.mac{display:block}
+body.is-windows .platform-only.windows{display:block}
+body.is-linux .platform-only.linux{display:block}
+/* If we couldn't detect platform, show all warnings as a fallback */
+body.is-unknown .platform-only{display:block}
 
 /* Tips */
 .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
@@ -115,30 +136,46 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
   <div class="container">
     <div class="check-icon fade-up">&#10003;</div>
     <h1 class="fade-up delay-1">Thanks for purchasing <em>VoiceForge!</em></h1>
-    <p class="fade-up delay-2">You now have lifetime access. Download the app below and you'll be dictating in under two minutes.</p>
-    <a href="https://github.com/SubliminalCoding/VoiceForge/releases/download/v1.0.0/VoiceForge-1.0.0-arm64.dmg" class="dl-btn fade-up delay-3">
+    <p class="fade-up delay-2">Pick your platform and you'll be dictating in under two minutes.</p>
+
+    <a class="dl-btn fade-up delay-3" id="dl-primary" href="#" aria-disabled="true" target="_blank" rel="noopener">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v10m0 0l-4-4m4 4l4-4"/><path d="M3 15v2h14v-2"/></svg>
-      Download VoiceForge for Mac
+      <span id="dl-primary-label">Detecting your platform&hellip;</span>
     </a>
-    <div class="dl-meta fade-up delay-4">macOS 13+ &middot; Apple Silicon (arm64) &middot; ~45 MB</div>
+    <div class="dl-meta fade-up delay-4" id="dl-primary-meta">Loading latest release&hellip;</div>
+
+    <div class="dl-other-wrap fade-up delay-4">
+      <div class="dl-other-label">Or pick a different platform</div>
+      <div class="dl-other-grid" id="dl-other-grid">
+        <a class="dl-other-btn" data-platform="mac-arm" href="#" aria-disabled="true" target="_blank" rel="noopener">macOS &middot; Apple Silicon</a>
+        <a class="dl-other-btn" data-platform="mac-intel" href="#" aria-disabled="true" target="_blank" rel="noopener">macOS &middot; Intel</a>
+        <a class="dl-other-btn" data-platform="windows" href="#" aria-disabled="true" target="_blank" rel="noopener">Windows</a>
+        <a class="dl-other-btn" data-platform="linux-appimage" href="#" aria-disabled="true" target="_blank" rel="noopener">Linux &middot; AppImage</a>
+        <a class="dl-other-btn" data-platform="linux-deb" href="#" aria-disabled="true" target="_blank" rel="noopener">Linux &middot; .deb</a>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="dl-section">
   <div class="container">
-    <div class="dl-section-title fade-up">Setup in 5 steps</div>
+    <div class="dl-section-title fade-up">Setup in a few steps</div>
     <ol class="setup-steps">
       <li class="fade-up delay-1">
         <h3>Download and install</h3>
-        <p>Open the DMG file above, then drag VoiceForge into your Applications folder.</p>
+        <p>Open the file you downloaded and follow your platform's normal install flow (drag to Applications on Mac, run the installer on Windows, etc.).</p>
       </li>
-      <li class="fade-up delay-1">
-        <h3>Bypass the macOS warning</h3>
-        <p>On first launch, macOS will warn about an unidentified developer. Right-click the app, click <strong>Open</strong>, then click <strong>Open</strong> again to confirm.</p>
+      <li class="fade-up delay-1 platform-only mac">
+        <h3>Bypass the first-launch macOS warning</h3>
+        <p>Apple-signed but not yet notarized, so Gatekeeper will warn on first launch. <strong>Right-click the app, click Open, then click Open again to confirm.</strong> You only need to do this once.</p>
+      </li>
+      <li class="fade-up delay-1 platform-only windows">
+        <h3>If SmartScreen warns you, click "More info"</h3>
+        <p>VoiceForge is signed by an SSL.com certificate, but Windows builds reputation per-publisher over time. If SmartScreen blocks the installer, click <strong>More info</strong> and then <strong>Run anyway</strong>. This warning will go away automatically as more people install.</p>
       </li>
       <li class="fade-up delay-2">
         <h3>Get your free Groq API key</h3>
-        <p>Create an account at <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a> and generate an API key. It's free.</p>
+        <p>Create an account at <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a> and generate an API key. Free tier covers normal personal use.</p>
       </li>
       <li class="fade-up delay-2">
         <h3>Paste your API key</h3>
@@ -180,16 +217,20 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
     <div class="dl-section-title fade-up">Frequently asked questions</div>
     <ul class="faq-list">
       <li class="faq-item fade-up delay-1">
-        <div class="faq-q">Why does macOS show a warning?</div>
-        <div class="faq-a">VoiceForge is distributed outside the Mac App Store, so macOS Gatekeeper flags it as unidentified. This is normal for indie Mac apps. Right-click the app, choose Open, then confirm. You only need to do this once.</div>
+        <div class="faq-q">Why does macOS show a warning on first launch?</div>
+        <div class="faq-a">VoiceForge is signed with an Apple Developer ID but not yet notarized through Apple's automated checks. Gatekeeper still flags signed-but-not-notarized apps as a precaution. Right-click the app, choose Open, then confirm. One-time only. Notarization is on the roadmap.</div>
       </li>
       <li class="faq-item fade-up delay-2">
-        <div class="faq-q">How do I get a Groq API key?</div>
-        <div class="faq-a">Go to <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a>, sign up for a free account, and create an API key from your dashboard. Groq offers a generous free tier that covers normal usage.</div>
+        <div class="faq-q">Why does Windows show a SmartScreen warning?</div>
+        <div class="faq-a">VoiceForge is signed by SSL.com, but Windows SmartScreen builds publisher reputation incrementally as more users install signed software. The warning disappears automatically once enough installs accumulate. Click <strong>More info → Run anyway</strong> in the meantime.</div>
       </li>
       <li class="faq-item fade-up delay-3">
+        <div class="faq-q">How do I get a Groq API key?</div>
+        <div class="faq-a">Go to <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a>, sign up for a free account, and create an API key from your dashboard. Groq's free tier covers normal personal usage.</div>
+      </li>
+      <li class="faq-item fade-up delay-4">
         <div class="faq-q">Is my data private?</div>
-        <div class="faq-a">Yes. VoiceForge processes audio locally on your machine using your own API key. Your recordings and transcriptions are never sent to VoiceForge servers. You control your data completely.</div>
+        <div class="faq-a">Yes. VoiceForge sends your audio directly from your machine to Groq using your own API key. Recordings and transcriptions are never sent to VoiceForge servers. You control your data.</div>
       </li>
     </ul>
   </div>
@@ -200,9 +241,9 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
     <div class="support-box fade-up">
       <p>Need help getting set up? We're here for you.</p>
       <div class="support-links">
-        <a href="https://github.com/SubliminalCoding/VoiceForge-App" class="support-link" target="_blank" rel="noopener">
+        <a href="https://github.com/SubliminalCoding/VoiceForge-App/issues" class="support-link" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          GitHub
+          GitHub Issues
         </a>
       </div>
     </div>
@@ -220,6 +261,116 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
     </div>
   </div>
 </footer>
+
+<script>
+// Hydrate download buttons from the latest GitHub release.
+// No version bump on this page is needed when we ship a new release —
+// /releases/latest always points at the newest tag, and we resolve asset
+// URLs by filename pattern.
+(function setupDownloads() {
+  var REPO = 'SubliminalCoding/VoiceForge-App';
+
+  // Detect OS family. We can't reliably detect Apple Silicon vs Intel from
+  // userAgent (Apple deliberately lies for compatibility), so we default
+  // Mac users to Apple Silicon — the dominant Mac architecture since 2020 —
+  // and let them pick Intel from the alternatives grid.
+  function detectPlatform() {
+    var ua = navigator.userAgent || '';
+    if (/Win/i.test(ua)) return 'windows';
+    if (/Mac/i.test(ua)) return 'mac-arm';
+    if (/Linux|X11/i.test(ua)) return 'linux-appimage';
+    return 'unknown';
+  }
+
+  // Tag a body class so platform-specific setup steps show only when relevant.
+  var detected = detectPlatform();
+  document.body.classList.add(
+    detected === 'windows' ? 'is-windows' :
+    detected === 'mac-arm' || detected === 'mac-intel' ? 'is-mac' :
+    detected === 'linux-appimage' || detected === 'linux-deb' ? 'is-linux' :
+    'is-unknown'
+  );
+
+  var LABELS = {
+    'mac-arm':       { primary: 'Download for Mac (Apple Silicon)', meta: 'macOS 13+ &middot; Apple Silicon (arm64)' },
+    'mac-intel':     { primary: 'Download for Mac (Intel)',         meta: 'macOS 13+ &middot; Intel (x86_64)' },
+    'windows':       { primary: 'Download for Windows',             meta: 'Windows 10/11 &middot; 64-bit' },
+    'linux-appimage':{ primary: 'Download for Linux',               meta: 'AppImage &middot; x86_64' },
+    'linux-deb':     { primary: 'Download .deb for Linux',          meta: 'Debian / Ubuntu &middot; x86_64' }
+  };
+
+  // Pick a release asset by filename pattern.
+  function pickAsset(assets, predicate) {
+    for (var i = 0; i < assets.length; i++) {
+      if (predicate(assets[i].name)) return assets[i];
+    }
+    return null;
+  }
+
+  function urlsFromRelease(release) {
+    var a = release.assets || [];
+    return {
+      'mac-arm':        (pickAsset(a, function(n){ return /\.dmg$/i.test(n) && /arm64/i.test(n); }) || {}).browser_download_url,
+      'mac-intel':      (pickAsset(a, function(n){ return /\.dmg$/i.test(n) && !/arm64/i.test(n); }) || {}).browser_download_url,
+      'windows':        (pickAsset(a, function(n){ return /\.exe$/i.test(n) && !/blockmap/i.test(n); }) || {}).browser_download_url,
+      'linux-appimage': (pickAsset(a, function(n){ return /\.AppImage$/i.test(n); }) || {}).browser_download_url,
+      'linux-deb':      (pickAsset(a, function(n){ return /\.deb$/i.test(n); }) || {}).browser_download_url
+    };
+  }
+
+  function applyUrls(urls, version) {
+    // Primary button
+    var primaryKey = detected === 'unknown' ? 'mac-arm' : detected;
+    var primaryUrl = urls[primaryKey];
+    var primaryBtn = document.getElementById('dl-primary');
+    var primaryLabel = document.getElementById('dl-primary-label');
+    var primaryMeta = document.getElementById('dl-primary-meta');
+    if (primaryUrl) {
+      primaryBtn.href = primaryUrl;
+      primaryBtn.removeAttribute('aria-disabled');
+      primaryLabel.textContent = LABELS[primaryKey].primary;
+      primaryMeta.innerHTML = LABELS[primaryKey].meta + ' &middot; ' + version;
+    } else {
+      primaryLabel.textContent = 'Download not available for your platform';
+      primaryMeta.textContent = 'Pick from alternatives below';
+    }
+    // Alternatives grid
+    var grid = document.getElementById('dl-other-grid');
+    var btns = grid.querySelectorAll('[data-platform]');
+    btns.forEach(function(btn) {
+      var key = btn.getAttribute('data-platform');
+      var url = urls[key];
+      if (url) {
+        btn.href = url;
+        btn.removeAttribute('aria-disabled');
+        if (key === primaryKey) btn.classList.add('is-current');
+      }
+    });
+  }
+
+  function showError(message) {
+    var primaryLabel = document.getElementById('dl-primary-label');
+    var primaryMeta = document.getElementById('dl-primary-meta');
+    primaryLabel.textContent = 'Download links are temporarily unavailable';
+    primaryMeta.innerHTML = message + ' &middot; <a href="https://github.com/' + REPO + '/releases/latest" target="_blank" rel="noopener">Browse releases on GitHub</a>';
+  }
+
+  fetch('https://api.github.com/repos/' + REPO + '/releases/latest', { cache: 'no-cache' })
+    .then(function(r) {
+      if (!r.ok) throw new Error('GitHub API ' + r.status);
+      return r.json();
+    })
+    .then(function(release) {
+      var urls = urlsFromRelease(release);
+      var version = release.tag_name || release.name || 'latest';
+      applyUrls(urls, version);
+    })
+    .catch(function(err) {
+      console.warn('Failed to fetch latest release:', err);
+      showError('Try again in a moment');
+    });
+})();
+</script>
 
 </body>
 </html>
