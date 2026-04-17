@@ -257,6 +257,17 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
 /* Honest framing for the lifetime-cap callout */
 .pricing-cap{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);font-weight:600}
 .pricing-cap::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange)}
+
+/* Screenshot showcase */
+.shot-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:16px}
+.shot{margin:0;display:flex;flex-direction:column;gap:14px}
+.shot-frame{position:relative;border-radius:16px;border:1px solid var(--border);background:var(--surface);padding:6px;box-shadow:0 12px 40px rgba(0,0,0,0.5);transition:border-color 0.2s,transform 0.2s}
+.shot-frame:hover{border-color:var(--accent);transform:translateY(-3px)}
+.shot-frame img{display:block;width:100%;height:auto;border-radius:10px}
+.shot figcaption{font-size:13px;color:var(--text2);text-align:center;line-height:1.5;padding:0 8px}
+.shot figcaption strong{color:var(--text);font-weight:700;display:block;margin-bottom:2px;font-size:14px}
+@media (max-width:900px){.shot-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}}
+@media (max-width:520px){.shot-grid{grid-template-columns:1fr;max-width:360px;margin:16px auto 0}}
 </style>
 </head>
 <body>
@@ -363,6 +374,39 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:12p
         <h3>Pasted where you were</h3>
         <p>Text lands in whatever app had focus. Under 2 seconds, end to end.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-border" id="preview">
+  <div class="container">
+    <h2 class="section-title text-center fade-up">See it <em>in action</em></h2>
+    <p class="section-desc centered fade-up delay-1">A compact panel that lives next to your work. One hotkey, live transcription, and every word cleaned up and ready to paste.</p>
+    <div class="shot-grid">
+      <figure class="shot fade-up delay-1">
+        <div class="shot-frame"><img src="screenshots/home-idle.png" alt="VoiceForge home screen with a large microphone button, today's word count, and recent transcriptions list." loading="lazy" width="463" height="793"></div>
+        <figcaption><strong>Press your hotkey to start</strong>Today's stats and your latest transcriptions, one glance away.</figcaption>
+      </figure>
+      <figure class="shot fade-up delay-2">
+        <div class="shot-frame"><img src="screenshots/home-recording.png" alt="VoiceForge actively recording — red microphone with live audio waveform and a running timer." loading="lazy" width="463" height="793"></div>
+        <figcaption><strong>Live waveform while you talk</strong>Red mic and a real-time meter so you always know it's listening.</figcaption>
+      </figure>
+      <figure class="shot fade-up delay-3">
+        <div class="shot-frame"><img src="screenshots/settings-main.png" alt="VoiceForge settings screen showing the record shortcut, API key, language, corrections and dictionary cards." loading="lazy" width="463" height="793"></div>
+        <figcaption><strong>Set your hotkey, keys, and language</strong>Bind any key or mouse button. Plug in your own API key — BYOK.</figcaption>
+      </figure>
+      <figure class="shot fade-up delay-1">
+        <div class="shot-frame"><img src="screenshots/corrections.png" alt="Corrections screen — &quot;Tell the app what to expect&quot; hints, teach-a-word input, and a list of learned corrections." loading="lazy" width="463" height="793"></div>
+        <figcaption><strong>Teach it your jargon</strong>Names, products, acronyms — tell it once, it gets them right forever.</figcaption>
+      </figure>
+      <figure class="shot fade-up delay-2">
+        <div class="shot-frame"><img src="screenshots/settings-shortcuts.png" alt="Shortcuts settings with code-project learning and an add-a-shortcut form mapping spoken phrases to typed text." loading="lazy" width="463" height="793"></div>
+        <figcaption><strong>Shortcuts &amp; code-aware vocab</strong>Point it at a repo and it learns your function and file names.</figcaption>
+      </figure>
+      <figure class="shot fade-up delay-3">
+        <div class="shot-frame"><img src="screenshots/lifetime-totals.png" alt="Lifetime totals modal showing 2,048 words spoken, 53 transcriptions, and 83 average words per minute." loading="lazy" width="463" height="793"></div>
+        <figcaption><strong>See your lifetime output</strong>Words spoken, transcriptions, and your average pace over time.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
