@@ -62,8 +62,8 @@
   "applicationCategory": "ProductivityApplication",
   "operatingSystem": ["macOS", "Windows", "Linux"],
   "offers": [
-    {"@type": "Offer", "price": "12.00", "priceCurrency": "USD", "name": "Starter (monthly, BYOK)", "priceSpecification": {"@type": "UnitPriceSpecification", "billingDuration": "P1M"}},
-    {"@type": "Offer", "price": "199.00", "priceCurrency": "USD", "name": "Lifetime (BYOK)"}
+    {"@type": "Offer", "price": "12.00", "priceCurrency": "USD", "name": "Starter (monthly)", "priceSpecification": {"@type": "UnitPriceSpecification", "billingDuration": "P1M"}},
+    {"@type": "Offer", "price": "199.00", "priceCurrency": "USD", "name": "Lifetime"}
   ]
 }
 </script>
@@ -110,7 +110,7 @@ nav{padding:14px 0;position:sticky;top:0;z-index:100;background:rgba(9,9,11,0.72
 nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{font-size:20px;font-weight:900;letter-spacing:-0.03em;display:inline-flex;align-items:center;gap:9px}
 .logo span{color:var(--accent2)}
-.logo::before{content:'';width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,var(--accent),var(--accent3));box-shadow:0 4px 12px rgba(99,102,241,0.45),inset 0 1px 0 rgba(255,255,255,0.25)}
+.logo img{width:22px;height:22px;border-radius:5px}
 .nav-links{display:flex;align-items:center;gap:28px}
 .nav-links a.nav-link{font-size:14px;font-weight:600;color:var(--text2);transition:color 0.15s}
 .nav-links a.nav-link:hover{color:var(--text)}
@@ -317,7 +317,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:14p
 
 <nav aria-label="Primary">
   <div class="container">
-    <a href="/" class="logo" aria-label="VoiceForge home">Voice<span>Forge</span></a>
+    <a href="/" class="logo" aria-label="VoiceForge home"><img src="icon-512.png" alt="" width="22" height="22">Voice<span>Forge</span></a>
     <div class="nav-links">
       <a href="#preview" class="nav-link">Preview</a>
       <a href="#how" class="nav-link">How it works</a>
@@ -344,6 +344,18 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:14p
       <a href="#preview" class="btn-secondary">See it in action</a>
     </div>
     <p class="hero-fineprint fade-up delay-4">Plans from $12/mo &middot; 14-day free trial &middot; cancel anytime</p>
+  </div>
+</section>
+
+<section class="section-border" id="demo">
+  <div class="container text-center">
+    <h2 class="section-title fade-up">See it <em>in 60 seconds</em></h2>
+    <div class="fade-up delay-1" style="max-width:720px;margin:0 auto;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);background:var(--surface)">
+      <!-- Replace this div with your video embed, e.g.:
+           <iframe src="https://www.youtube.com/embed/VIDEO_ID" ... />
+      -->
+      <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3);font-size:15px">Video coming soon</div>
+    </div>
   </div>
 </section>
 
@@ -438,8 +450,8 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:14p
         <figcaption><strong>Live waveform while you talk</strong>Red mic and a real-time meter so you always know it's listening.</figcaption>
       </figure>
       <figure class="shot fade-up delay-3">
-        <div class="shot-frame"><img src="screenshots/settings-main.png" alt="VoiceForge settings screen showing the record shortcut, API key, language, corrections and dictionary cards." loading="lazy" width="463" height="793"></div>
-        <figcaption><strong>Set your hotkey, keys, and language</strong>Bind any key or mouse button. Plug in your own API key — BYOK.</figcaption>
+        <div class="shot-frame"><img src="screenshots/settings-main.png" alt="VoiceForge settings screen showing the record shortcut, language, corrections and dictionary cards." loading="lazy" width="463" height="793"></div>
+        <figcaption><strong>Set your hotkey and language</strong>Bind any key or mouse button. Cloud transcription works instantly.</figcaption>
       </figure>
       <figure class="shot fade-up delay-1">
         <div class="shot-frame"><img src="screenshots/corrections.png" alt="Corrections screen — &quot;Tell the app what to expect&quot; hints, teach-a-word input, and a list of learned corrections." loading="lazy" width="463" height="793"></div>
@@ -507,7 +519,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:14p
           <li>Voice profile learning</li>
           <li>Dictionary + auto-casing</li>
           <li>Global hotkey + auto-paste</li>
-          <li>Bring your own API key (BYOK)</li>
+          <li>VoiceForge Cloud — no API key needed</li>
           <li>Offline local mode</li>
           <li>All updates included</li>
         </ul>
@@ -521,7 +533,6 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:14p
         <div class="pricing-period">one-time payment, yours forever</div>
         <ul class="pricing-features">
           <li>Everything in Starter</li>
-          <li>Bring your own API key (BYOK)</li>
           <li>Offline local mode</li>
           <li>All future updates</li>
           <li>Priority support</li>
@@ -531,7 +542,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:14p
         <div class="pricing-alt"><span class="pricing-cap">Founding-customer pricing</span></div>
       </div>
     </div>
-    <p class="section-desc centered fade-up delay-3" style="margin-top:32px;font-size:14px;color:var(--text3)">A managed-AI tier (no API key required) is on the roadmap. <a href="mailto:hello@usevoiceforge.com?subject=Managed-AI%20waitlist&amp;body=Hi%20%E2%80%94%20please%20notify%20me%20when%20the%20managed-AI%20tier%20launches.%0A%0AThanks!" class="waitlist-link" style="color:var(--accent2);font-weight:600">Email us to join the waitlist</a> and we'll notify you when it launches.</p>
+    <p class="section-desc centered fade-up delay-3" style="margin-top:32px;font-size:14px;color:var(--text3)">Cloud transcription works out of the box — no API key needed. Powered by Groq.</p>
   </div>
 </section>
 <script>
@@ -597,7 +608,7 @@ footer .footer-links{display:flex;gap:24px;justify-content:center;margin-top:14p
       <h3>14-day free trial. <em>Cancel anytime.</em></h3>
       <div class="deal-sub" style="margin-top:12px">Try every feature for 14 days. Cancel anytime, no questions asked.</div>
       <a href="#pricing" class="deal-btn">Start Free Trial<span class="arrow" aria-hidden="true" style="display:inline-block;margin-left:2px;transition:transform 0.2s">&rarr;</span></a>
-      <div class="deal-fine">$12/mo (BYOK) or $199 lifetime. Annual saves 20%.</div>
+      <div class="deal-fine">$12/mo or $199 lifetime. Annual saves 20%.</div>
     </div>
   </div>
 </section>
